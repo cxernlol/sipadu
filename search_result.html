@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- META ============================================= -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+            <meta name="keywords" content="" />
+            <meta name="author" content="" />
+            <meta name="robots" content="" />
+            <meta property="og:title" content="Lepkom Mandiri Berbasis Virtual - Universitas Gunadarma" />
+            <meta property="og:image" content="https://vm.lepkom.gunadarma.ac.id/assets/front/images/logo-lepkom.png">
+            <meta property="og:description" content="Lepkom Mandiri Berbasis Virtual - Universitas Gunadarma" />
+            <meta name="format-detection" content="telephone=no">
+
+    <!-- FAVICONS ICON ============================================= -->
+    <link rel="icon" href="https://vm.lepkom.gunadarma.ac.id/assets/front/images/logo-lepkom.png" type="image/x-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="https://vm.lepkom.gunadarma.ac.id/assets/front/images/logo-lepkom.png" />
+
+    <!-- PAGE TITLE HERE ============================================= -->
+    <title>Lepkom Mandiri Berbasis Virtual - Universitas Gunadarma</title>
+
+    <!-- MOBILE SPECIFIC ============================================= -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--[if lt IE 9]>
+	<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/js/html5shiv.min.js"></script>
+	<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/js/respond.min.js"></script>
+	<![endif]-->
+
+    <!-- All PLUGINS CSS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="https://vm.lepkom.gunadarma.ac.id/assets/front/css/assets.css">
+
+    <!-- TYPOGRAPHY ============================================= -->
+    <link rel="stylesheet" type="text/css" href="https://vm.lepkom.gunadarma.ac.id/assets/front/css/typography.css">
+
+    <!-- SHORTCODES ============================================= -->
+    <link rel="stylesheet" type="text/css" href="https://vm.lepkom.gunadarma.ac.id/assets/front/css/shortcodes/shortcodes.css">
+
+    <!-- STYLESHEETS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="https://vm.lepkom.gunadarma.ac.id/assets/front/css/style.css">
+    <link class="skin" rel="stylesheet" type="text/css" href="https://vm.lepkom.gunadarma.ac.id/assets/front/css/color/color-1.css">
+
+    <!-- OrgChart ============================================= -->
+    <link rel="stylesheet" type="text/css" href="https://vm.lepkom.gunadarma.ac.id/assets/front/orgchart/orgchart.css">
+
+    <!-- REVOLUTION SLIDER CSS ============================================= -->
+    <link rel="stylesheet" type="text/css" href="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/css/settings.css">
+    <link rel="stylesheet" type="text/css" href="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/css/navigation.css">
+
+    <!-- DATATABLE -->
+    <link rel="stylesheet" type="text/css" href="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/datatable/datatables.min.css">
+    <!-- REVOLUTION SLIDER END -->
+    <script src="https://vm.lepkom.gunadarma.ac.id/assets/front/js/jquery.min.js"></script>
+    <style>
+        .modal-xl {
+            margin-top: 140px;
+            width: 96%;
+            max-width: 1000px;
+        }
+
+        @media (min-width: 768px) {
+            .modal-xl {
+                margin-top: 140px;
+                width: 90%;
+                max-width: 1000px;
+            }
+        }
+
+        li {
+            display: list-item;
+            list-style-position: inside;
+        }
+
+        ol li {
+            list-style: decimal;
+            list-style-position: inside;
+        }
+
+        /* Main Level */
+        ul {
+            margin-left: 20px;
+        }
+
+        /* Second Level */
+        ul ul {
+            margin-left: 25px;
+        }
+
+        /* Third Level */
+        ul ul ul {
+            margin-left: 30px;
+        }
+
+        /* and so on... */
+    </style>
+
+</head>
+
+<body id="bg">
+    <div class="page-wraper">
+        <!-- <div id="loading-icon-bx"></div> -->
+        <!-- Header Top ==== -->
+        <header class="header rs-nav">
+            <div class="top-bar">
+                <div class="container">
+                    <div class="row d-flex justify-content-between">
+                        <div class="topbar-left">
+                            <ul>
+                                <li><a href="https://vm.lepkom.gunadarma.ac.id/faq"><i class="fa fa-question-circle"></i>Ask a Question</a></li>
+                                <li>LePKom Mandiri Berbasis Virtual</li>
+                            </ul>
+                        </div>
+                        <div class="topbar-right">
+                            <ul>
+                                <li><i class="fa fa-search"></i> <a href="https://vm.lepkom.gunadarma.ac.id/JadwalAsisten">Jadwal Asisten</a></li>
+                                <li><i class="fa fa-sign-in"></i><a href="https://vm.lepkom.gunadarma.ac.id/auth"> Login</a></li>                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sticky-header navbar-expand-lg">
+                <div class="menu-bar clearfix">
+                    <div class="container clearfix">
+                        <!-- Header Logo ==== -->
+                        <div class="menu-logo">
+                            <a href="https://vm.lepkom.gunadarma.ac.id/"><img src="https://vm.lepkom.gunadarma.ac.id/assets/front/images/logo-lepkom.png" alt=""></a>
+                        </div>
+                        <!-- Mobile Nav Button ==== -->
+                        <button class="navbar-toggler collapsed menuicon justify-content-end" type="button" data-toggle="collapse" data-target="#menuDropdown" aria-controls="menuDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <!-- Author Nav ==== -->
+                        <div class="secondary-menu">
+                            <div class="secondary-inner">
+                                <ul>
+                                    <li><a href="javascript:;" class="btn-link"><i class="fa fa-instagram"></i></a></li>
+                                    <!-- Search Button ==== -->
+                                    <li class="search-btn"><button id="quik-search-btn" type="button" class="btn-link"><i class="fa fa-search"></i></button></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Search Box ==== -->
+                        <div class="nav-search-bar">
+                            <form action="https://vm.lepkom.gunadarma.ac.id/Pengumuman/search" method="POST" id="myForm">
+                                <input name="keyword" value="" type="text" class="form-control" placeholder="Cari Pengumuman" autofocus id="form-search" autocomplete="off">
+                                <span><i class="ti-search"></i></span>
+                            </form>
+                            <span id="search-remove"><i class="ti-close"></i></span>
+                        </div>
+                        <!-- Navigation Menu ==== -->
+                        <div class="menu-links navbar-collapse collapse justify-content-start" id="menuDropdown">
+                            <div class="menu-logo">
+                                <a href="https://vm.lepkom.gunadarma.ac.id/"><img src="https://vm.lepkom.gunadarma.ac.id/assets/front/images/logo.png" alt=""></a>
+                            </div>
+                            <ul class="nav navbar-nav">
+                                <li class="">
+                                    <a href="https://vm.lepkom.gunadarma.ac.id/">BERANDA</a>
+                                </li>
+                                <li class="">
+                                    <a href="https://vm.lepkom.gunadarma.ac.id/pengumuman">PENGUMUMAN</a>
+                                </li>
+                                <li class=""><a href="javascript:;">MATERI KURSUS<i class="fa fa-chevron-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <!-- <li><a href="https://vm.lepkom.gunadarma.ac.id/skema">SKEMA KURSUS</a></li> -->
+                                        <li><a href="https://vm.lepkom.gunadarma.ac.id/skema/tingkat1">TINGKAT 1</a></li>
+                                        <li><a href="https://vm.lepkom.gunadarma.ac.id/skema/tingkat2">TINGKAT 2</a></li>
+                                        <li><a href="https://vm.lepkom.gunadarma.ac.id/skema/tingkat3">TINGKAT 3</a></li>
+                                        <!-- <li><a href="https://vm.lepkom.gunadarma.ac.id/skema/tingkat4">TINGKAT 4</a></li> -->
+                                    </ul>
+                                </li>
+                                <li class="active"><a href="javascript:;">PRAKTIKAN <i class="fa fa-chevron-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="https://vm.lepkom.gunadarma.ac.id/jadwalPraktikan">JADWAL KURSUS</a></li>
+                                        <li><a href="https://vm.lepkom.gunadarma.ac.id/jadwalPengulangan">JADWAL PENGULANGAN</a></li>
+                                        <li><a href="https://vm.lepkom.gunadarma.ac.id/kelulusan">KELULUSAN</a></li>
+                                    </ul>
+                                </li>
+                                <li class="">
+                                    <a href="https://vm.lepkom.gunadarma.ac.id/agenda">AGENDA</a>
+                                </li>
+                                <li>
+                                    <a href="https://kursusvmlepkom.gunadarma.ac.id" target='_blank'>E-COURSE</a>
+                                </li>
+                                <li class=""><a href="javascript:;">TENTANG LEPKOM <i class="fa fa-chevron-down"></i></a>
+                                    <ul class="sub-menu">
+                                        <li><a href="https://vm.lepkom.gunadarma.ac.id/faq">FAQ</a></li>
+                                        <li><a href="https://vm.lepkom.gunadarma.ac.id/galeri">GALERI</a></li>
+                                        <li><a href="https://vm.lepkom.gunadarma.ac.id/calas">RECRUITMENT</a></li>
+                                        <li><a href="https://vm.lepkom.gunadarma.ac.id/kontak">KONTAK</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation Menu END ==== -->
+            </div>
+        </header>
+        <!-- Header Top END ==== --><!-- Content -->
+<div class="page-content bg-white">
+	<!-- Breadcrumb row -->
+	<div class="breadcrumb-row pt-1">
+		<div class="container">
+			<ul class="list-inline">
+				<li><a href="https://vm.lepkom.gunadarma.ac.id/">Home</a></li>
+				<li>Jadwal Kursus</li>
+			</ul>
+		</div>
+	</div>
+	<!-- Breadcrumb row END -->
+	<div class="section-area section-sp1 ovpr-dark bg-fix online-cours pt-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-12">
+					<div class="card">
+						<div class="card-header pb-0">
+							<div class="text-center">
+								<h4>JADWAL KURSUS PRAKTIKAN LEPKOM MANDIRI BERBASIS VIRTUAL <br> PERIODE PTA 2026-2027</h4>
+								<i class="mdi mdi-dots-horizontal text-gray"></i>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-12">
+									<h6 class="text-red">KETENTUAN KURSUS :</h6>
+									<div class="ttr-accordion m-b30 faq-bx bg-white" id="accordion1">
+																					<div class="panel">
+												<div class="acod-head">
+													<h6 class="acod-title">
+														<a data-toggle="collapse" href="#ketentuan1" class="" data-parent="#ketentuan1">
+															PELAKSANAAN KURSUS LEPKOM ATA 2024-2025														</a>
+													</h6>
+												</div>
+												<div id="ketentuan1" class="acod-body collapse show">
+													<div class="acod-content">
+														<blockquote>
+<p><span style="font-family:Georgia,serif;"><strong><span style="color:#8e44ad;"><span style="font-size:18px;">LOKASI KURSUS</span></span></strong></span></p>
+
+<p><span style="color:#8e44ad;"><span style="font-family:Georgia,serif;"><strong><span style="font-size:16px;">Depok</span></strong></span></span></p>
+
+<ul>
+	<li><span style="font-family:Georgia,serif;"><strong><span style="font-size:14px;">Kampus&nbsp;F4 : &nbsp;</span></strong></span>
+
+	<ul>
+		<li><span style="font-family:Georgia,serif;"><strong><span style="font-size:14px;">Gedung 1&nbsp;Lantai&nbsp;9 (F491 dan F492)</span></strong></span></li>
+		<li><span style="font-family:Georgia,serif;"><strong><span style="font-size:14px;">Gedung 1 Lantai 11 (F4111 dan F4112)</span></strong></span></li>
+	</ul>
+	</li>
+	<li><span style="font-family:Georgia,serif;"><strong><span style="font-size:14px;">Kampus&nbsp;F8 : </span></strong></span>
+	<ul>
+		<li><span style="font-family:Georgia,serif;"><strong><span style="font-size:14px;">Gedung 4&nbsp;Lantai&nbsp;2 (F8425 dan F8426)</span></strong></span></li>
+		<li><span style="font-family:Georgia,serif;"><strong><span style="font-size:14px;">Gedung 4 Lantai 3 (F8435 dan F8436)</span></strong></span></li>
+	</ul>
+	</li>
+</ul>
+
+<p><span style="color:#8e44ad;"><span style="font-family:Georgia,serif;"><strong><span style="font-size:16px;">Kalimalang</span></strong></span></span></p>
+
+<ul>
+	<li><span style="font-family:Georgia,serif;"><strong><span style="font-size:14px;">Kampus&nbsp;J5</span></strong></span>
+
+	<ul>
+		<li><span style="font-family:Georgia,serif;"><strong><span style="font-size:14px;">Ruang 121, 122, 124, dan 125</span></strong></span></li>
+	</ul>
+	</li>
+</ul>
+
+<p><span style="color:#8e44ad;"><span style="font-size:16px;"><span style="font-family:Georgia,serif;"><strong>Karawaci</strong></span></span></span></p>
+
+<p><meta charset="UTF-8" /></p>
+
+<ul>
+	<li><span style="font-size:14px;"><span style="font-family:Georgia,serif;"><strong>Kampus Karawaci&nbsp;: &nbsp;</strong></span></span>
+
+	<ul>
+		<li><span style="font-size:14px;"><span style="font-family:Georgia,serif;"><strong>Gedung 1&nbsp;Lantai 7&nbsp;(K174)</strong></span></span></li>
+	</ul>
+	</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p><font color="#8e44ad" face="Georgia, serif"><span style="font-size: 16px;"><b>Cengkareng</b></span></font></p>
+
+<p><!--%3Cmeta%20charset%3D%22UTF-8%22%20%2F%3E--></p>
+
+<ul>
+	<li><span style="font-size:14px;"><span style="font-family:Georgia,serif;"><strong>Kampus L2 Cengkareng&nbsp;&nbsp;</strong></span></span>
+
+	<ul>
+		<li><font face="Georgia, serif"><span style="font-size: 14px;"><b>Ruang L2-51</b></span></font></li>
+	</ul>
+	</li>
+</ul>
+</blockquote>
+
+<p>&nbsp;</p>
+
+<p><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-size:14px;"><strong>Sesi Kursus :&nbsp;</strong></span></span></p>
+
+<table height="121" style="border-collapse: collapse;" width="495">
+	<colgroup>
+		<col style="width:104pt" width="139" />
+		<col style="width:46pt" width="61" />
+		<col style="width:77pt" width="103" />
+		<col style="width:63pt" width="84" />
+		<col style="width:55pt" width="73" />
+		<col style="width:77pt" width="103" />
+	</colgroup>
+	<tbody>
+		<tr>
+			<td class="xl73" style="border-bottom:1px solid black; height:20px; width:139px; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fabf8f; border-top:1px solid black; border-right:1px solid black; border-left:1px solid black"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:700"><span style="font-style:normal"><span style="text-decoration:none">HARI</span></span></span></span></span></span></td>
+			<td class="xl73" style="border-bottom:1px solid black; width:61px; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fabf8f; border-top:1px solid black; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:700"><span style="font-style:normal"><span style="text-decoration:none">SESI</span></span></span></span></span></span></td>
+			<td class="xl73" style="border-bottom:1px solid black; width:103px; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fabf8f; border-top:1px solid black; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:700"><span style="font-style:normal"><span style="text-decoration:none">WAKTU</span></span></span></span></span></span></td>
+			<td class="xl77" style="border-bottom:1px solid black; width:84px; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#b1a0c7; border-top:1px solid black; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:700"><span style="font-style:normal"><span style="text-decoration:none">HARI</span></span></span></span></span></span></td>
+			<td class="xl77" style="border-bottom:1px solid black; width:73px; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#b1a0c7; border-top:1px solid black; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:700"><span style="font-style:normal"><span style="text-decoration:none">SESI</span></span></span></span></span></span></td>
+			<td class="xl77" style="border-bottom:1px solid black; width:103px; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#b1a0c7; border-top:1px solid black; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:700"><span style="font-style:normal"><span style="text-decoration:none">WAKTU</span></span></span></span></span></span></td>
+		</tr>
+		<tr>
+			<td class="xl69" rowspan="5" style="border-bottom:1px solid black; height:100px; width:139px; text-align:center; vertical-align:middle; white-space:normal; padding-top:1px; padding-right:1px; padding-left:1px; background-color:#fde9d9; border-top:none; border-right:1px solid black; border-left:1px solid black"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">SENIN-KAMIS, SABTU</span></span></span></span></span></span></td>
+			<td class="xl70" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fde9d9; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">0</span></span></span></span></span></span></td>
+			<td class="xl70" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fde9d9; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">07.30-10.00</span></span></span></span></span></span></td>
+			<td class="xl74" rowspan="5" style="border-bottom:1px solid black; width:84px; text-align:center; vertical-align:middle; white-space:normal; padding-top:1px; padding-right:1px; padding-left:1px; background-color:#e4dfec; border-top:none; border-right:1px solid black; border-left:1px solid black"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">JUM&#39;AT</span></span></span></span></span></span></td>
+			<td class="xl75" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#e4dfec; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">0</span></span></span></span></span></span></td>
+			<td class="xl75" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#e4dfec; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">07.00-09.00</span></span></span></span></span></span></td>
+		</tr>
+		<tr>
+			<td class="xl70" style="border-bottom:1px solid black; height:20px; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fde9d9; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">1</span></span></span></span></span></span></td>
+			<td class="xl71" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fde9d9; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">10.00-12.30</span></span></span></span></span></span></td>
+			<td class="xl75" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#e4dfec; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">1</span></span></span></span></span></span></td>
+			<td class="xl75" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#e4dfec; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">09.00-11.30</span></span></span></span></span></span></td>
+		</tr>
+		<tr>
+			<td class="xl70" style="border-bottom:1px solid black; height:20px; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fde9d9; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">2</span></span></span></span></span></span></td>
+			<td class="xl70" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fde9d9; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">13.00-15.30</span></span></span></span></span></span></td>
+			<td class="xl75" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#e4dfec; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">2</span></span></span></span></span></span></td>
+			<td class="xl75" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#e4dfec; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">13.30-16.00</span></span></span></span></span></span></td>
+		</tr>
+		<tr>
+			<td class="xl70" style="border-bottom:1px solid black; height:20px; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fde9d9; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">3</span></span></span></span></span></span></td>
+			<td class="xl70" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fde9d9; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">15.45-18.15</span></span></span></span></span></span></td>
+			<td class="xl75" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#e4dfec; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">3</span></span></span></span></span></span></td>
+			<td class="xl75" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#e4dfec; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">16.00-18.30</span></span></span></span></span></span></td>
+		</tr>
+		<tr>
+			<td class="xl70" style="border-bottom:1px solid black; height:20px; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fde9d9; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">4</span></span></span></span></span></span></td>
+			<td class="xl72" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#fde9d9; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">18.30-21.00</span></span></span></span></span></span></td>
+			<td class="xl75" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#e4dfec; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">4</span></span></span></span></span></span></td>
+			<td class="xl76" style="border-bottom:1px solid black; text-align:center; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:bottom; white-space:nowrap; background-color:#e4dfec; border-top:none; border-right:1px solid black; border-left:none"><span style="color:#000000;"><span style="font-size:12px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;"><span style="font-weight:400"><span style="font-style:normal"><span style="text-decoration:none">18.30-21.00</span></span></span></span></span></span></td>
+		</tr>
+	</tbody>
+</table>
+													</div>
+												</div>
+											</div>
+																															<div class="panel">
+												<div class="acod-head">
+													<h6 class="acod-title">
+														<a data-toggle="collapse" href="#ketentuan2" class="collapsed" data-parent="#ketentuan2">
+															Pelayanan Konfirmasi dan Teknis														</a>
+													</h6>
+												</div>
+												<div id="ketentuan2" class="acod-body collapse">
+													<div class="acod-content">
+														<p><span style="font-size:14px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;">Praktikan kursus dapat melakukan konfirmasi ataupun teknis pengerjaan pada jam berikut :</span></span></p>
+
+<hr />
+<p><span style="font-size:14px;"><strong><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;">Pelayanan Konfirmasi :</span></strong></span></p>
+
+<ul>
+	<li><span style="font-size:14px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;">Senin - Kamis : 10.00-12.00 istirahat 13.30-15.30 WIB</span></span></li>
+	<li><span style="font-size:14px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;">Jumat : 10.00-11.30 istirahat 13.30-15.30 WIB</span></span></li>
+	<li><span style="font-size:14px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;">Sabtu : 10.00-12.00 WIB</span></span></li>
+</ul>
+
+<hr />
+<p><span style="font-size:14px;"><strong><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;">Pelayanan Teknis (hanya untuk kursus pengulangan Kloter Reguler &amp; Liburan) :</span></strong></span></p>
+
+<ul>
+	<li><span style="font-size:14px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;">Senin-Sabtu : 07.30-18.00 WIB</span></span></li>
+</ul>
+
+<hr />
+<p><span style="font-size:14px;"><span style="font-family:Lucida Sans Unicode,Lucida Grande,sans-serif;">Harap membaca setiap waktu yang sudah dijabarkan dengan seksama.</span></span></p>
+</div>
+												</div>
+											</div>
+																			</div>
+								</div>
+								<div class="col-md-5">
+									<form action="https://vm.lepkom.gunadarma.ac.id/jadwalPraktikan/search" method="POST" id="myForm">
+										<div class="input-group mb-3">
+											<input type="text" class="form-control" placeholder="NPM / Nama / Kelas / Kode Jadwal / Materi Kursus" name="keyword" autocomplete="off" autofocus>
+											<div class="input-group-append">
+																									<a class="btn yellow" href="https://vm.lepkom.gunadarma.ac.id/jadwalPraktikan">
+														<span class="input-group-btn">Reset</span>
+													</a>
+																								<button class="btn blue" type="submit" name="submit">
+													<span class="input-group-btn"><i class="fa fa-search"></i>Cari</span>
+												</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<span>Hasil : 0</span>
+							<span> / Pencarian : 50421000</span>							<div class="table-responsive hoverable-table table-hover">
+								<table id="tableNoFilter" class="table">
+									<thead>
+										<tr>
+											<th class="text-center fs14" width="3%">No</th>
+											<th class="text-center fs14" width="7%">NPM</th>
+											<th class="text-center fs14" width="25%">NAMA</th>
+											<th class="text-center fs14" width="5%">KELAS</th>
+											<th class="text-center fs14" width="30%">JADWAL KURSUS <br> KODE JADWAL </th>
+											<th class="text-center fs14" width="10%">KAT. KURSUS / PELAKSANAAN</th>
+											<th class="text-center fs14" width="5%">LOKASI</th>
+											<th class="text-center fs14" width="5%">HARI</th>
+											<th class="text-center fs14" width="5%">RUANG</th>
+											<th class="text-center fs14" width="5%">SESI</th>
+										</tr>
+									</thead>
+									<tbody>
+																					<tr>
+												<td colspan="11">
+													<div class="alert alert-danger" role="alert">
+														Data Jadwal Belum Tersedia!.
+													</div>
+												</td>
+											</tr>
+																													</tbody>
+								</table>
+							</div>
+							<div class="col-sm-12">
+															</div>
+						</div>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle"></h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<h6>Ruang : <label id="ruang" class="tx-bold"></label></h6>
+				<h6>Waktu Akses : <label id="waktu" class="tx-bold"></label></h6>
+				<h6>Keterangan Jadwal : </br></h6>
+				<div id="keteranganJadwal"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Content END--><!-- Footer ==== -->
+<footer>
+    <div class="footer-top">
+        <div class="pt-exebar">
+            <div class="container">
+                <div class="d-flex align-items-stretch">
+                    <marquee scrolldelay="90" class="m-a10" onmouseover="this.stop();" onmouseout="this.start();">Selamat Datang di Website LePKom Mandiri Berbasis Virtual</marquee>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 col-md-6 col-sm-12 footer-col-3">
+                    <div class="widget">
+                        <h5 class="footer-title">Lokasi Tugas Kami</h5>
+                        <p class="text-capitalize">KAMPUS DEPOK, KARAWACI, CENGKARENG UNIVERSITAS GUNADARMA</p>
+                        <p>Jalan Raya Bogor No.21,Kec. Cimanggis, Kota Depok, Jawa Barat. Kode Pos: 16452, Indonesia </p>
+                        <p class="text-capitalize">KAMPUS KALIMALANG UNIVERSITAS GUNADARMA</p>
+                        <p>Jl. Stasiun Cakung, Sentra Timur, Kecamatan Cakung, Daerah Khusus Ibukota Jakarta, Indonesia </p>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12">
+                    <div class="row">
+                        <div class="col-6 col-lg-8 col-md-4 col-sm-4">
+                            <div class="widget footer_widget">
+                                <h5 class="footer-title">UG Direktori</h5>
+                                <ul>
+                                    <li><a href="https://baak.gunadarma.ac.id" target="_blank">UG BAAK </a></li>
+                                    <li><a href="https://studentsite.gunadarma.ac.id" target="_blank">UG STUDENT SITE</a></li>
+                                    <li><a href="http://bapsi.gunadarma.ac.id" target="_blank">UG BAPSI</a></li>
+                                    <li><a href="https://v-class.gunadarma.ac.id" target="_blank">UG V-CLASS</a></li>
+                                    <li><a href="https://library.gunadarma.ac.id" target="_blank">UG LIBRARY</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-3 col-md-3 col-sm-12 footer-col-3">
+                    <div class="row">
+                        <div class="col-6 col-lg-8 col-md-4 col-sm-4">
+                            <div class="widget footer_widget">
+                                <h5 class="footer-title">Link</h5>
+                                <ul>
+                                    <li><a href="https://vm.lepkom.gunadarma.ac.id/pengumuman">Pengumuman</a></li>
+                                    <li><a href="https://kursusvmlepkom.gunadarma.ac.id" target="_blank">E-Course Lepkom</a></li>
+                                    <li><a href="https://vm.lepkom.gunadarma.ac.id/jadwalPraktikan">Jadwal Kursus</a></li>
+                                    <li><a href="https://vm.lepkom.gunadarma.ac.id/jadwalPengulangan">Jadwal Pengulangan</a></li>
+                                    <li><a href="https://vm.lepkom.gunadarma.ac.id/kelulusan">Kelulusan</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 text-center"> <a target="_blank" href="https://vm.lepkom.gunadarma.ac.id/">&copy;Copyright Lepkom Mandiri Berbasis Virtual 2021 </a></div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer END ==== -->
+<button class="back-to-top fa fa-chevron-up"></button>
+</div>
+
+<!-- External JavaScripts -->
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/bootstrap/js/popper.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/magnific-popup/magnific-popup.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/counter/waypoints-min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/counter/counterup.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/imagesloaded/imagesloaded.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/masonry/masonry.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/masonry/filter.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/owl-carousel/owl.carousel.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/js/functions.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/js/contact.js"></script>
+<!-- <script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/switcher/switcher.js"></script> -->
+<!-- Revolution JavaScripts Files -->
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/jquery.themepunch.tools.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/jquery.themepunch.revolution.min.js"></script>
+<!-- Slider revolution 5.0 Extensions  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/extensions/revolution.extension.video.min.js"></script>
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/orgchart/orgchart.js"></script>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+    (function() {
+        var s1 = document.createElement("script"),
+            s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/5ec3a5a78ee2956d73a28106/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<!--End of Tawk.to Script -->
+
+
+<script>
+    $(document).ready(function() {
+        // create a tree
+        $("#tree-data").jOrgChart({
+            chartElement: $("#tree-view"),
+            nodeClicked: nodeClicked
+        });
+        // lighting a node in the selection
+        function nodeClicked(node, type) {
+            node = node || $(this);
+            $('.jOrgChart .selected').removeClass('selected');
+            node.addClass('selected');
+        }
+    });
+
+    jQuery(document).ready(function() {
+        var ttrevapi;
+        var tpj = jQuery;
+        if (tpj("#rev_slider_486_1").revolution == undefined) {
+            revslider_showDoubleJqueryError("#rev_slider_486_1");
+        } else {
+            ttrevapi = tpj("#rev_slider_486_1").show().revolution({
+                sliderType: "standard",
+                jsFileLocation: "https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/revolution/js/",
+                sliderLayout: "fullwidth",
+                dottedOverlay: "none",
+                delay: 9000,
+                navigation: {
+                    keyboardNavigation: "on",
+                    keyboard_direction: "horizontal",
+                    mouseScrollNavigation: "off",
+                    mouseScrollReverse: "default",
+                    onHoverStop: "on",
+                    touch: {
+                        touchenabled: "on",
+                        swipe_threshold: 75,
+                        swipe_min_touches: 1,
+                        swipe_direction: "horizontal",
+                        drag_block_vertical: false
+                    },
+                    arrows: {
+                        style: "uranus",
+                        enable: true,
+                        hide_onmobile: false,
+                        hide_onleave: false,
+                        tmp: '',
+                        left: {
+                            h_align: "left",
+                            v_align: "center",
+                            h_offset: 10,
+                            v_offset: 0
+                        },
+                        right: {
+                            h_align: "right",
+                            v_align: "center",
+                            h_offset: 10,
+                            v_offset: 0
+                        }
+                    },
+
+                },
+                viewPort: {
+                    enable: true,
+                    outof: "pause",
+                    visible_area: "80%",
+                    presize: false
+                },
+                responsiveLevels: [1240, 1024, 778, 480],
+                visibilityLevels: [1240, 1024, 778, 480],
+                gridwidth: [1240, 1024, 778, 480],
+                gridheight: [768, 600, 600, 600],
+                lazyType: "none",
+                parallax: {
+                    type: "scroll",
+                    origo: "enterpoint",
+                    speed: 400,
+                    levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 46, 47, 48, 49, 50, 55],
+                    type: "scroll",
+                },
+                shadow: 0,
+                spinner: "off",
+                stopLoop: "off",
+                stopAfterLoops: -1,
+                stopAtSlide: -1,
+                shuffle: "off",
+                autoHeight: "off",
+                hideThumbsOnMobile: "off",
+                hideSliderAtLimit: 0,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 0,
+                debugMode: false,
+                fallbacks: {
+                    simplifyAll: "off",
+                    nextSlideOnWindowFocus: "off",
+                    disableFocusListener: false,
+                }
+            });
+        }
+    });
+</script>
+
+<!-- Datatables -->
+<script src="https://vm.lepkom.gunadarma.ac.id/assets/front/vendors/datatable/datatables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        function strip(html) {
+            var tmp = document.implementation.createHTMLDocument("New").body;
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || "";
+        }
+    });
+
+    $(function() {
+        $('#tableNoFilter').dataTable({
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bInfo": false,
+            "bAutoWidth": false
+        });
+    });
+
+    $(function() {
+        $('#tableAdmin').dataTable({
+            "aLengthMenu": [
+                [50, 75, 100, -1],
+                [50, 75, 100, "All"]
+            ],
+            "iDisplayLength": 50
+        });
+    });
+
+    $(function() {
+        $(".modal").appendTo("body");
+    });
+
+    $('#exampleModalCenter').on('show.bs.modal', function(e) {
+        var kodeJadwal = $(e.relatedTarget).attr('data-kodeJadwal');
+        var kode_jadwal = $(e.relatedTarget).attr('data-kode_jadwal');
+        var kloter = $(e.relatedTarget).attr('data-kloter');
+        var keterangan = $(e.relatedTarget).attr('data-keterangan');
+        var keteranganJaga = $(e.relatedTarget).attr('data-keteranganJaga');
+        var ruang = $(e.relatedTarget).attr('data-ruang');
+        var waktu = $(e.relatedTarget).attr('data-waktu');
+        var headerOld = $(e.relatedTarget).attr('data-headerOld');
+        var headerNew = $(e.relatedTarget).attr('data-headerNew');
+
+        $(this).find('#kode_jadwal').text(kode_jadwal);
+        $(this).find('#kloter').text(kloter);
+        $(this).find('#keteranganJadwal').html(keterangan);
+        $(this).find('#keteranganJaga').html(keteranganJaga);
+        $(this).find('#ruang').text(ruang);
+        $(this).find('#waktu').text(waktu);
+        $(this).find('#exampleModalLongTitle').text(kodeJadwal);
+    });
+</script>
+
+</body>
+
+</html>
