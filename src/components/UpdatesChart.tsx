@@ -53,9 +53,9 @@ export function UpdatesChart() {
   return (
     <Card className="border-0 shadow-none bg-transparent">
       <CardHeader>
-        <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">Total Updates Delivered</CardTitle>
+        <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">Total Pembaruan Terkirim</CardTitle>
         <CardDescription className="text-slate-500 dark:text-white/30">
-          Tracking announcements, schedules, and materials — Jan to Jun 2026
+          Pelacakan pengumuman, jadwal, dan materi yang terkirim — Jan hingga Jun 2026
         </CardDescription>
       </CardHeader>
       <CardContent>
