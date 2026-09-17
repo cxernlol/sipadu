@@ -29,33 +29,33 @@ const chartData = [
 const chartConfig = {
   gunadarma: {
     label: "Gunadarma",
-    color: "hsl(270, 70%, 50%)", // Purple
+    color: "hsl(270, 70%, 60%)",
   },
   ui: {
     label: "UI",
-    color: "hsl(45, 90%, 50%)", // Yellow
+    color: "hsl(45, 90%, 55%)",
   },
   ugm: {
     label: "UGM",
-    color: "hsl(220, 80%, 50%)", // Blue
+    color: "hsl(220, 80%, 60%)",
   },
   itb: {
     label: "ITB",
-    color: "hsl(175, 70%, 40%)", // Teal
+    color: "hsl(175, 70%, 50%)",
   },
   ub: {
     label: "UB",
-    color: "hsl(25, 90%, 55%)", // Orange
+    color: "hsl(25, 90%, 60%)",
   },
 } satisfies ChartConfig;
 
 export function UpdatesChart() {
   return (
-    <Card className="border-slate-200 shadow-sm w-full mt-16">
+    <Card className="border-0 shadow-none bg-transparent">
       <CardHeader>
-        <CardTitle className="font-serif text-2xl text-slate-900">Total Updates Sent</CardTitle>
-        <CardDescription>
-          Tracking announcements, schedules, and materials delivered across all supported universities (Jan - Jun 2026)
+        <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">Total Updates Delivered</CardTitle>
+        <CardDescription className="text-slate-500 dark:text-white/30">
+          Tracking announcements, schedules, and materials — Jan to Jun 2026
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -70,20 +70,20 @@ export function UpdatesChart() {
               bottom: 12,
             }}
           >
-            <CartesianGrid vertical={false} strokeDasharray="3 3" className="stroke-slate-200" />
+            <CartesianGrid vertical={false} strokeDasharray="3 3" className="stroke-slate-200 dark:stroke-white/[0.06]" />
             <XAxis
               dataKey="month"
               tickLine={false}
               axisLine={false}
               tickMargin={8}
               tickFormatter={(value) => value.slice(0, 3)}
-              className="text-slate-500 text-xs"
+              className="text-slate-500 dark:text-white/30 text-xs"
             />
-            <YAxis 
+            <YAxis
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              className="text-slate-500 text-xs"
+              className="text-slate-500 dark:text-white/30 text-xs"
             />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <Line
@@ -131,10 +131,10 @@ export function UpdatesChart() {
       <CardFooter>
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
-            <div className="flex items-center gap-2 font-medium leading-none text-slate-700">
-              Pertumbuhan data naik 52% bulan ini <TrendingUp className="h-4 w-4 text-green-500" />
+            <div className="flex items-center gap-2 font-medium leading-none text-slate-700 dark:text-white/60">
+              Pertumbuhan data naik 52% bulan ini <TrendingUp className="h-4 w-4 text-emerald-500" />
             </div>
-            <div className="flex items-center gap-2 leading-none text-slate-500">
+            <div className="flex items-center gap-2 leading-none text-slate-500 dark:text-white/25">
               Sistem telah mendeliver lebih dari 1.000 update real-time ke ribuan mahasiswa.
             </div>
           </div>
