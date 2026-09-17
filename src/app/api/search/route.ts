@@ -1,5 +1,21 @@
 import { NextResponse } from 'next/server';
 import * as cheerio from 'cheerio';
+import fs from 'fs/promises';
+import path from 'path';
+
+export interface SearchResult {
+  no: string;
+  npm: string;
+  nama: string;
+  kelas: string;
+  jadwal: string;
+  kodeJadwal: string;
+  kategori: string;
+  lokasi: string;
+  hari: string;
+  ruang: string;
+  sesi: string;
+}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -9,10 +25,17 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Keyword is required' }, { status: 400 });
   }
 
+  let isFallback = false;
+  let results: SearchResult[] = [];
+
   try {
     const formData = new URLSearchParams();
     formData.append('keyword', keyword);
     formData.append('submit', '');
+
+    // Attempt live fetch from VM LePKom with a strict timeout of 5 seconds to prevent hanging
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
 
     const response = await fetch('https://vm.lepkom.gunadarma.ac.id/jadwalPraktikan/search', {
       method: 'POST',
@@ -21,7 +44,10 @@ export async function GET(request: Request) {
         'Content-Type': 'application/x-www-form-urlencoded',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36'
       },
+      signal: controller.signal
     });
+    
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch from LePKom: ${response.status}`);
@@ -29,7 +55,6 @@ export async function GET(request: Request) {
 
     const html = await response.text();
     const $ = cheerio.load(html);
-    const results = [];
 
     // Parse the table rows
     $('#tableNoFilter tbody tr').each((i, el) => {
@@ -70,9 +95,37 @@ export async function GET(request: Request) {
       });
     });
 
-    return NextResponse.json({ results });
+    // If we parse the HTML successfully and it doesn't throw, we assume success.
+    // However, if results is empty, it could mean WAF blocked us and returned an unexpected HTML page.
+    // To be safe, if we suspect a WAF block (e.g. title is "Just a moment..." or similar Cloudflare page), we should throw.
+    const pageTitle = $('title').text().toLowerCase();
+    if (pageTitle.includes('just a moment') || pageTitle.includes('captcha') || pageTitle.includes('attention required')) {
+        throw new Error("WAF Block / Captcha encountered");
+    }
+
   } catch (error) {
-    console.error('Search API Error:', error);
-    return NextResponse.json({ error: 'Failed to search jadwal' }, { status: 500 });
+    console.error('Search API Error, triggering fallback:', error);
+    
+    // --- FALLBACK LOGIC ---
+    try {
+      const dbPath = path.join(process.cwd(), 'src/data/db.json');
+      const fileContents = await fs.readFile(dbPath, 'utf8');
+      const data = JSON.parse(fileContents);
+      
+      if (data && data.jadwal) {
+        const query = keyword.toLowerCase();
+        results = data.jadwal.filter((item: SearchResult) => 
+          item.npm.toLowerCase().includes(query) ||
+          item.nama.toLowerCase().includes(query) ||
+          item.kelas.toLowerCase().includes(query)
+        );
+        isFallback = true;
+      }
+    } catch (fallbackError) {
+      console.error('Fallback read error:', fallbackError);
+      return NextResponse.json({ error: 'Failed to search jadwal and fallback also failed' }, { status: 500 });
+    }
   }
+
+  return NextResponse.json({ results, isFallback });
 }

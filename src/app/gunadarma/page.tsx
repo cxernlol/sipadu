@@ -33,7 +33,7 @@ const KALENDER_PTA_2026 = [
 export default async function Home() {
   const currentUni = { name: "Universitas Gunadarma", color: "bg-blue-600", badge: "bg-green-500", iconColor: "text-blue-600" };
 
-  let announcements = [];
+  let announcements: any[] = [];
   try {
     announcements = await getAnnouncements();
   } catch (e) {

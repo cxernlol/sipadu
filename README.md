@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SiPadu (Sistem Informasi Terpadu) 🎓
 
-## Getting Started
+A modern, high-performance integrated university information system built with Next.js. Currently featuring integrations for Universitas Gunadarma (BAAK & LePKom), with support for ITB, UGM, UI, and UB in the pipeline.
 
-First, run the development server:
+## 🌟 Key Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Real-Time Data Integration**: Scrapes and aggregates live data from university subsystems (e.g., VM LePKom, BAAK) to provide schedules, announcements, and study materials in one place.
+- **Smart Fallback System**: Built-in resilient API routes that gracefully handle Cloudflare WAF/CAPTCHA blocks by silently routing requests to a local `db.json` cache.
+- **Premium Modern UI**: Designed with Tailwind CSS v4 and `shadcn/ui`, featuring glassmorphism, smooth micro-animations, and sophisticated typography (Inter & Playfair Display).
+- **SEO & Production Ready**: Fully configured for Vercel deployment with comprehensive technical SEO (Dynamic XML Sitemaps, `robots.txt`, JSON-LD schema, canonical tags).
+- **Legal & Compliance**: Includes integrated GDPR/CCPA cookie consent banners and localized (Indonesian) Privacy Policy and Terms of Service.
+- **Performance Optimized**: Localized assets (e.g., FontAwesome) to eliminate third-party render-blocking requests and achieve high Lighthouse scores.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Styling**: Tailwind CSS v4
+- **Components**: [shadcn/ui](https://ui.shadcn.com/) (Radix UI)
+- **Scraping**: Cheerio
+- **Deployment**: Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Getting Started
 
-## Learn More
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/cxernlol/sipadu.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-To learn more about Next.js, take a look at the following resources:
+## 📝 Fallback Data Modification
+If the live VM LePKom server blocks your IP, the app will automatically fallback to the local cache. You can modify the mocked data in `src/data/db.json`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔒 Security
+Automated deployments via Vercel include free auto-renewing SSL, DDOS protection, and firewall layers. Custom security headers (`HSTS`, `X-Frame-Options`, `X-Content-Type-Options`) are statically configured in `next.config.ts`.

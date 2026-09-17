@@ -1571,7 +1571,99 @@
       ]
     }
   ],
-  "jadwal": [],
+  "jadwal": [
+    {
+      "no": "1",
+      "npm": "10123456",
+      "nama": "Andi Saputra",
+      "kelas": "3KA01",
+      "jadwal": "WEB APPLICATION DEVELOPMENT WITH GO PROGRAMMING LANGUAGE",
+      "kodeJadwal": "KD-GO-01",
+      "kategori": "Praktikum Reguler",
+      "lokasi": "Kampus D (Depok)",
+      "hari": "Senin",
+      "ruang": "D412",
+      "sesi": "1 / 07:30-09:30"
+    },
+    {
+      "no": "2",
+      "npm": "10123456",
+      "nama": "Andi Saputra",
+      "kelas": "3KA01",
+      "jadwal": "GOLANG FOR INTERMEDIATE",
+      "kodeJadwal": "KD-GO-02",
+      "kategori": "Sertifikasi",
+      "lokasi": "Kampus D (Depok)",
+      "hari": "Rabu",
+      "ruang": "D421",
+      "sesi": "3 / 11:30-13:30"
+    },
+    {
+      "no": "3",
+      "npm": "50422111",
+      "nama": "Budi Santoso",
+      "kelas": "2IA02",
+      "jadwal": "JAVA FOR INTERMEDIATE",
+      "kodeJadwal": "KD-JV-01",
+      "kategori": "Praktikum Reguler",
+      "lokasi": "Kampus J (Kalimalang)",
+      "hari": "Selasa",
+      "ruang": "J211",
+      "sesi": "2 / 09:30-11:30"
+    },
+    {
+      "no": "4",
+      "npm": "50422111",
+      "nama": "Budi Santoso",
+      "kelas": "2IA02",
+      "jadwal": "DESKTOP APPLICATION DEVELOPMENT WITH JAVA PROGRAMMING LANGUAGE",
+      "kodeJadwal": "KD-JV-02",
+      "kategori": "Sertifikasi",
+      "lokasi": "Kampus J (Kalimalang)",
+      "hari": "Kamis",
+      "ruang": "J312",
+      "sesi": "4 / 13:30-15:30"
+    },
+    {
+      "no": "5",
+      "npm": "11122334",
+      "nama": "Citra Lestari",
+      "kelas": "4KA05",
+      "jadwal": "PROYEK ADEMPIERE",
+      "kodeJadwal": "KD-AD-01",
+      "kategori": "Tugas Akhir",
+      "lokasi": "Kampus D (Depok)",
+      "hari": "Jumat",
+      "ruang": "D223",
+      "sesi": "1 / 07:30-09:30"
+    },
+    {
+      "no": "6",
+      "npm": "12345678",
+      "nama": "Budi Setiawan",
+      "kelas": "3KA01",
+      "jadwal": "WEB APPLICATION DEVELOPMENT WITH GO PROGRAMMING LANGUAGE",
+      "kodeJadwal": "KD-GO-01",
+      "kategori": "Praktikum Reguler",
+      "lokasi": "Kampus D (Depok)",
+      "hari": "Senin",
+      "ruang": "D412",
+      "sesi": "1 / 07:30-09:30"
+    },
+    {
+      "no": "7",
+      "npm": "98765432",
+      "nama": "Ayu Wandira",
+      "kelas": "4IA01",
+      "jadwal": "PROYEK MIKROTIK",
+      "kodeJadwal": "KD-MK-01",
+      "kategori": "Tugas Akhir",
+      "lokasi": "Kampus D (Depok)",
+      "hari": "Senin",
+      "ruang": "D424",
+      "sesi": "4 / 13:30-15:30"
+    }
+  ],
   "kalender": [
     {
       "id": "kal-1",

@@ -12,7 +12,7 @@ export default async function JadwalPage() {
         <p className="text-slate-500">Pilih wilayah untuk melihat jadwal kursus dan pengulangan.</p>
       </div>
 
-      <JadwalClient schedule={schedule} />
+      <JadwalClient />
     </div>
   );
 }

@@ -57,7 +57,7 @@ export default function MvpLandingPage() {
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {UNIVERSITIES.map((uni) => (
                         <li key={uni.id}>
-                          <NavigationMenuLink asChild>
+                          <NavigationMenuLink>
                             <a
                               href={uni.domain}
                               className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 hover:text-slate-900 focus:bg-slate-100 focus:text-slate-900"
@@ -87,7 +87,7 @@ export default function MvpLandingPage() {
                 <DropdownMenuLabel>Universitas Didukung</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 {UNIVERSITIES.map((uni) => (
-                  <DropdownMenuItem key={uni.id} asChild>
+                  <DropdownMenuItem key={uni.id}>
                     <a href={uni.domain} className="cursor-pointer flex items-center justify-between">
                       <span className="flex items-center gap-2">
                         <img src={uni.logo} alt={uni.name} className="h-4 w-4 object-contain" />

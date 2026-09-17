@@ -27,6 +27,7 @@ export function JadwalClient() {
   const [keyword, setKeyword] = useState("");
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<SearchResult[] | null>(null);
+  const [isFallback, setIsFallback] = useState(false);
   const [error, setError] = useState("");
 
   const handleSearch = async (e: React.FormEvent) => {
@@ -43,6 +44,7 @@ export function JadwalClient() {
       
       const data = await res.json();
       setResults(data.results || []);
+      setIsFallback(!!data.isFallback);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -86,6 +88,11 @@ export function JadwalClient() {
             <h3 className="font-semibold flex items-center gap-2">
               <i className="fa-solid fa-calendar-days text-red-400"></i> Hasil Pencarian Jadwal
             </h3>
+            {isFallback && (
+              <span className="text-xs bg-amber-500/20 text-amber-100 border border-amber-500/50 px-2 py-0.5 rounded-full flex items-center gap-1 font-medium mt-2 md:mt-0">
+                <i className="fa-solid fa-bolt"></i> Server sibuk, menggunakan data cache
+              </span>
+            )}
           </div>
           
           <div className="overflow-x-auto">
