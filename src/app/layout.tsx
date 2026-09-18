@@ -34,6 +34,27 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "SiPadu",
+  },
+  formatDetection: {
+    telephone: false,
+  },
+};
+
+import type { Viewport } from "next";
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+    { media: "(prefers-color-scheme: dark)", color: "#020617" },
+  ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 const jsonLd = {
