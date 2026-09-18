@@ -237,6 +237,10 @@ async fn main() -> Result<()> {
         db.cmp(&da)
     });
     
+    // Deduplikasi berdasarkan judul (agar tidak ada pengumuman kembar)
+    let mut seen_titles = std::collections::HashSet::new();
+    all_announcements.retain(|a| seen_titles.insert(a.title.clone()));
+    
     let db = Db {
         announcements: all_announcements,
         materi: lepkom_data.1,

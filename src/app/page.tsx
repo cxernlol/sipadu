@@ -7,12 +7,18 @@ import { RealTimeStats } from "@/components/UpdatesChart";
 import { getStats } from "@/lib/scraper";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
+import gunadarmaLogo from "@/app/gunadarma/assets/gunadarma.jpg";
+import uiLogo from "@/app/ui/assets/UniversitasIndonesia.png";
+import ugmLogo from "@/app/ugm/assets/ugm.webp";
+import itbLogo from "@/app/itb/assets/itb.png";
+import ubLogo from "@/app/ub/assets/ub.webp";
+
 const UNIVERSITIES = [
-  { id: "gunadarma", name: "Universitas Gunadarma", shortName: "Gunadarma", domain: "/gunadarma", status: "Live", accent: "from-purple-500 to-indigo-600", iconBg: "bg-purple-50", iconText: "text-purple-500", ringColor: "ring-purple-200", description: "Jadwal kursus, pengumuman BAAK, materi LePKom, dan kalender akademik.", logo: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Logo_Universitas_Gunadarma.svg" },
-  { id: "ui", name: "Universitas Indonesia", shortName: "UI", domain: "/ui", status: "Segera Hadir", accent: "from-amber-400 to-yellow-500", iconBg: "bg-amber-50", iconText: "text-amber-500", ringColor: "ring-amber-200", description: "Sistem informasi terpadu untuk civitas akademika UI.", logo: "https://upload.wikimedia.org/wikipedia/commons/9/9a/Universitas_Indonesia_logo.svg" },
-  { id: "ugm", name: "Universitas Gadjah Mada", shortName: "UGM", domain: "/ugm", status: "Segera Hadir", accent: "from-blue-500 to-cyan-500", iconBg: "bg-blue-50", iconText: "text-blue-500", ringColor: "ring-blue-200", description: "Portal akademik terpadu untuk mahasiswa UGM.", logo: "https://upload.wikimedia.org/wikipedia/commons/b/b3/Lambang_UGM.svg" },
-  { id: "itb", name: "Institut Teknologi Bandung", shortName: "ITB", domain: "/itb", status: "Segera Hadir", accent: "from-teal-500 to-emerald-500", iconBg: "bg-teal-50", iconText: "text-teal-500", ringColor: "ring-teal-200", description: "Integrasi sistem informasi kampus ITB.", logo: "https://upload.wikimedia.org/wikipedia/commons/5/52/Institut_Teknologi_Bandung_logo.svg" },
-  { id: "ub", name: "Universitas Brawijaya", shortName: "UB", domain: "/ub", status: "Segera Hadir", accent: "from-orange-500 to-red-500", iconBg: "bg-orange-50", iconText: "text-orange-500", ringColor: "ring-orange-200", description: "Agregasi data akademik Universitas Brawijaya.", logo: "https://upload.wikimedia.org/wikipedia/commons/a/ad/Logo_Universitas_Brawijaya.svg" },
+  { id: "gunadarma", name: "Universitas Gunadarma", shortName: "Gunadarma", domain: "/gunadarma", status: "Live", accent: "from-purple-500 to-indigo-600", iconBg: "bg-purple-50", iconText: "text-purple-500", ringColor: "ring-purple-200", description: "Jadwal kursus, pengumuman BAAK, materi LePKom, dan kalender akademik.", logo: gunadarmaLogo.src },
+  { id: "ui", name: "Universitas Indonesia", shortName: "UI", domain: "/ui", status: "Segera Hadir", accent: "from-amber-400 to-yellow-500", iconBg: "bg-amber-50", iconText: "text-amber-500", ringColor: "ring-amber-200", description: "Sistem informasi terpadu untuk civitas akademika UI.", logo: uiLogo.src },
+  { id: "ugm", name: "Universitas Gadjah Mada", shortName: "UGM", domain: "/ugm", status: "Segera Hadir", accent: "from-blue-500 to-cyan-500", iconBg: "bg-blue-50", iconText: "text-blue-500", ringColor: "ring-blue-200", description: "Portal akademik terpadu untuk mahasiswa UGM.", logo: ugmLogo.src },
+  { id: "itb", name: "Institut Teknologi Bandung", shortName: "ITB", domain: "/itb", status: "Segera Hadir", accent: "from-teal-500 to-emerald-500", iconBg: "bg-teal-50", iconText: "text-teal-500", ringColor: "ring-teal-200", description: "Integrasi sistem informasi kampus ITB.", logo: itbLogo.src },
+  { id: "ub", name: "Universitas Brawijaya", shortName: "UB", domain: "/ub", status: "Segera Hadir", accent: "from-orange-500 to-red-500", iconBg: "bg-orange-50", iconText: "text-orange-500", ringColor: "ring-orange-200", description: "Agregasi data akademik Universitas Brawijaya.", logo: ubLogo.src },
 ];
 
 const FEATURES = [

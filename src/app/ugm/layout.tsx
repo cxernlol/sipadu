@@ -12,7 +12,7 @@ export default function UGMLayout({
       <main className="flex-1">
         {children}
       </main>
-      <Footer />
+      <Footer uni="ugm" />
     </div>
   );
 }

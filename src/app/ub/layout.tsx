@@ -12,7 +12,7 @@ export default function UBLayout({
       <main className="flex-1">
         {children}
       </main>
-      <Footer />
+      <Footer uni="ub" />
     </div>
   );
 }
