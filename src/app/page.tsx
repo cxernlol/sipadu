@@ -22,12 +22,12 @@ const UNIVERSITIES = [
 ];
 
 const FEATURES = [
-  { icon: "fa-solid fa-bolt", title: "Sinkronisasi Real-Time", description: "Data diambil langsung dari server kampus dan diproses secara instan.", color: "text-amber-600", bg: "bg-amber-50" },
-  { icon: "fa-solid fa-shield-halved", title: "Fallback Otomatis", description: "Jika server kampus down, sistem otomatis beralih ke cache lokal tanpa error.", color: "text-emerald-600", bg: "bg-emerald-50" },
-  { icon: "fa-solid fa-code", title: "API Publik", description: "Akses data kampus via REST API gratis untuk developer dan mahasiswa.", color: "text-blue-600", bg: "bg-blue-50" },
-  { icon: "fa-solid fa-chart-line", title: "Analitik", description: "Pemantauan real-time aktivitas seluruh jaringan kampus yang terhubung.", color: "text-purple-600", bg: "bg-purple-50" },
-  { icon: "fa-solid fa-lock", title: "Keamanan Tinggi", description: "HTTPS, HSTS, security headers, dan perlindungan DDoS via Vercel Edge.", color: "text-red-600", bg: "bg-red-50" },
-  { icon: "fa-solid fa-globe", title: "Multi-Kampus", description: "Arsitektur multi-tenant yang mendukung ratusan universitas secara bersamaan.", color: "text-cyan-600", bg: "bg-cyan-50" },
+  { icon: "fa-solid fa-bolt", title: "Sinkronisasi Real-Time", description: "Data diambil langsung dari server kampus dan diproses secara instan.", color: "text-amber-600 dark:text-amber-400", bg: "bg-amber-50 dark:bg-amber-900/30" },
+  { icon: "fa-solid fa-shield-halved", title: "Fallback Otomatis", description: "Jika server kampus down, sistem otomatis beralih ke cache lokal tanpa error.", color: "text-emerald-600 dark:text-emerald-400", bg: "bg-emerald-50 dark:bg-emerald-900/30" },
+  { icon: "fa-solid fa-code", title: "API Publik", description: "Akses data kampus via REST API gratis untuk developer dan mahasiswa.", color: "text-blue-600 dark:text-blue-400", bg: "bg-blue-50 dark:bg-blue-900/30" },
+  { icon: "fa-solid fa-chart-line", title: "Analitik", description: "Pemantauan real-time aktivitas seluruh jaringan kampus yang terhubung.", color: "text-purple-600 dark:text-purple-400", bg: "bg-purple-50 dark:bg-purple-900/30" },
+  { icon: "fa-solid fa-lock", title: "Keamanan Tinggi", description: "HTTPS, HSTS, security headers, dan perlindungan DDoS via Vercel Edge.", color: "text-red-600 dark:text-red-400", bg: "bg-red-50 dark:bg-red-900/30" },
+  { icon: "fa-solid fa-globe", title: "Multi-Kampus", description: "Arsitektur multi-tenant yang mendukung ratusan universitas secara bersamaan.", color: "text-cyan-600 dark:text-cyan-400", bg: "bg-cyan-50 dark:bg-cyan-900/30" },
 ];
 
 const API_EXAMPLE = `// Contoh penggunaan API SiPadu
@@ -268,10 +268,10 @@ export default async function LandingPage() {
                 Akses jadwal, pengumuman, dan materi dari seluruh universitas yang terhubung melalui REST API yang gratis dan terbuka. Dokumentasi lengkap, response time &lt;200ms.
               </p>
               <div className="flex flex-wrap gap-3">
-                <span className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold">REST API</span>
-                <span className="px-3 py-1.5 rounded-full bg-blue-50 text-blue-800 border border-blue-200 text-xs font-semibold">JSON Response</span>
-                <span className="px-3 py-1.5 rounded-full bg-purple-50 text-purple-800 border border-purple-200 text-xs font-semibold">Rate Limited</span>
-                <span className="px-3 py-1.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-semibold">CORS Enabled</span>
+                <span className="px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/30 text-emerald-800 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 text-xs font-semibold">REST API</span>
+                <span className="px-3 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/30 text-blue-800 dark:text-blue-400 border border-blue-200 dark:border-blue-800 text-xs font-semibold">JSON Response</span>
+                <span className="px-3 py-1.5 rounded-full bg-purple-50 dark:bg-purple-900/30 text-purple-800 dark:text-purple-400 border border-purple-200 dark:border-purple-800 text-xs font-semibold">Rate Limited</span>
+                <span className="px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-900/30 text-amber-800 dark:text-amber-400 border border-amber-200 dark:border-amber-800 text-xs font-semibold">CORS Enabled</span>
               </div>
             </AnimateIn>
 
