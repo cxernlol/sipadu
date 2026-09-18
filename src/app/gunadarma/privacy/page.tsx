@@ -6,10 +6,10 @@ export const metadata = {
 export default function GunadarmaPrivacyPolicy() {
   return (
     <div className="container mx-auto px-4 max-w-4xl py-16 md:py-24">
-      <div className="bg-white dark:bg-slate-900 p-8 md:p-12 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800">
-        <h1 className="font-serif text-4xl text-slate-900 dark:text-slate-50 mb-8">Kebijakan Privasi — Portal Gunadarma</h1>
+      <div className="bg-white dark:bg-zinc-900/50 p-8 md:p-12 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm">
+        <h1 className="font-serif text-4xl text-zinc-900 dark:text-zinc-50 mb-8">Kebijakan Privasi — Portal Gunadarma</h1>
         
-        <div className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-serif">
+        <div className="prose prose-zinc dark:prose-invert max-w-none prose-headings:font-serif">
           <p>Terakhir diperbarui: {new Date().toLocaleDateString('id-ID')}</p>
           
           <h2>1. Sumber Data Gunadarma</h2>

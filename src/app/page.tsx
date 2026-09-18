@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/AnimateIn";
 import { RealTimeStats } from "@/components/UpdatesChart";
 import { getStats } from "@/lib/scraper";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const UNIVERSITIES = [
   { id: "gunadarma", name: "Universitas Gunadarma", shortName: "Gunadarma", domain: "/gunadarma", status: "Live", accent: "from-purple-500 to-indigo-600", iconBg: "bg-purple-50", iconText: "text-purple-500", ringColor: "ring-purple-200", description: "Jadwal kursus, pengumuman BAAK, materi LePKom, dan kalender akademik.", logo: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Logo_Universitas_Gunadarma.svg" },
@@ -48,7 +49,7 @@ export default async function LandingPage() {
   const stats = await getStats();
   const totalData = stats.totalAnnouncements + stats.totalJadwal + stats.totalMateri + stats.totalKalender;
   return (
-    <div className="min-h-screen bg-[#f8f8fa] text-slate-900 relative overflow-hidden">
+    <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50 relative overflow-hidden">
       {/* ===== AMBIENT BACKGROUND ===== */}
       <div className="fixed inset-0 -z-10">
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-200/30 rounded-full blur-[128px] animate-pulse" />
@@ -59,7 +60,7 @@ export default async function LandingPage() {
       </div>
 
       {/* ===== NAVBAR ===== */}
-      <header className="sticky top-0 z-50 border-b border-slate-200/60 bg-[#f8f8fa]/80 backdrop-blur-2xl">
+      <header className="sticky top-0 z-50 border-b border-zinc-200/60 dark:border-zinc-800/60 bg-zinc-50/80 dark:bg-black/80 backdrop-blur-2xl">
         <div className="container mx-auto px-6 h-18 flex items-center justify-between max-w-6xl">
           <Link href="/" className="flex items-center gap-3 group">
             <div className="h-9 w-9 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center text-white text-sm shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 group-hover:scale-105 transition-all duration-300">
@@ -70,11 +71,12 @@ export default async function LandingPage() {
             </span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8 text-sm text-slate-400">
-            <a href="#universitas" className="hover:text-slate-900 transition-colors duration-200">Universitas</a>
-            <a href="#fitur" className="hover:text-slate-900 transition-colors duration-200">Fitur</a>
-            <Link href="/api-docs" className="hover:text-slate-900 transition-colors duration-200">API</Link>
-            <a href="#statistik" className="hover:text-slate-900 transition-colors duration-200">Statistik</a>
+          <nav className="hidden md:flex items-center gap-8 text-sm text-zinc-500 dark:text-zinc-400">
+            <a href="#universitas" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors duration-200">Universitas</a>
+            <a href="#fitur" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors duration-200">Fitur</a>
+            <Link href="/api-docs" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors duration-200">API</Link>
+            <a href="#statistik" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors duration-200">Statistik</a>
+            <ThemeToggle />
           </nav>
         </div>
       </header>
@@ -94,17 +96,17 @@ export default async function LandingPage() {
 
             {/* Main headline */}
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.95] tracking-tight mb-8">
-              <span className="text-slate-900">Satu portal</span>
+              <span className="text-zinc-900 dark:text-zinc-50">Satu portal</span>
               <br />
-              <span className="text-slate-900">untuk </span>
+              <span className="text-zinc-900 dark:text-zinc-50">untuk </span>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600">
                 seluruh kampus.
               </span>
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12 font-light">
-              Agregasi informasi akademik, jadwal kursus, pengumuman, dan materi dari berbagai universitas Indonesia — dalam satu platform <span className="text-slate-600 font-medium">terpadu</span> dan <span className="text-slate-600 font-medium">open-source</span>.
+            <p className="text-lg md:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-12 font-light">
+              Agregasi informasi akademik, jadwal kursus, pengumuman, dan materi dari berbagai universitas Indonesia — dalam satu platform <span className="text-zinc-700 dark:text-zinc-300 font-medium">terpadu</span> dan <span className="text-zinc-700 dark:text-zinc-300 font-medium">open-source</span>.
             </p>
 
             {/* CTA Buttons */}
@@ -112,7 +114,7 @@ export default async function LandingPage() {
               <a href="#universitas" className={buttonVariants({ className: "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-full px-8 py-6 text-base font-medium shadow-xl shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 cursor-pointer" })}>
                 <i className="fa-solid fa-rocket mr-2" /> Pilih Kampus
               </a>
-              <a href="https://github.com/cxernlol/sipadu" target="_blank" rel="noopener noreferrer" className={buttonVariants({ className: "bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-full px-8 py-6 text-base font-medium shadow-sm transition-all duration-300 cursor-pointer" })}>
+              <a href="https://github.com/cxernlol/sipadu" target="_blank" rel="noopener noreferrer" className={buttonVariants({ className: "bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 rounded-full px-8 py-6 text-base font-medium shadow-sm transition-all duration-300 cursor-pointer" })}>
                 <i className="fa-brands fa-github mr-2" /> Star on GitHub
               </a>
             </div>
@@ -121,7 +123,7 @@ export default async function LandingPage() {
       </section>
 
       {/* ===== STATS BAR ===== */}
-      <section className="border-y border-slate-200/60 bg-white/60 backdrop-blur-sm">
+      <section className="border-y border-zinc-200/60 dark:border-zinc-800/60 bg-white/60 dark:bg-black/60 backdrop-blur-sm">
         <div className="container mx-auto px-6 max-w-6xl py-10">
           <AnimateIn delay={0.15}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -132,10 +134,10 @@ export default async function LandingPage() {
                 { value: "< 200", label: "Respons (ms)", suffix: "" },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <div className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">
+                  <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
                     {stat.value}<span className="text-blue-600">{stat.suffix}</span>
                   </div>
-                  <div className="text-sm text-slate-400 mt-1 font-medium">{stat.label}</div>
+                  <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1 font-medium">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -148,10 +150,10 @@ export default async function LandingPage() {
         <div className="container mx-auto px-6 max-w-6xl">
           <AnimateIn className="text-center mb-16">
             <span className="text-xs font-bold tracking-[0.2em] text-blue-600 uppercase mb-4 block">Jaringan Kampus</span>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4">
               Universitas yang <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">terhubung</span>
             </h2>
-            <p className="text-slate-400 max-w-xl mx-auto text-lg font-light">
+            <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto text-lg font-light">
               Platform multi-tenant yang menghubungkan sistem informasi kampus di seluruh Indonesia.
             </p>
           </AnimateIn>
@@ -160,9 +162,9 @@ export default async function LandingPage() {
             {UNIVERSITIES.map((uni) => (
               <StaggerItem key={uni.id}>
                 <a href={uni.domain} className={`block h-full ${uni.status !== "Live" ? "" : ""}`}>
-                  <Card className={`relative overflow-hidden h-full border-slate-200/80 bg-white/70 backdrop-blur-sm transition-all duration-500 ${
+                  <Card className={`relative overflow-hidden h-full border-zinc-200/80 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/50 backdrop-blur-sm transition-all duration-500 ${
                     uni.status === "Live"
-                      ? "hover:bg-white hover:border-slate-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/50 group"
+                      ? "hover:bg-white dark:hover:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-1 hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-black/50 group"
                       : "opacity-50"
                   }`}>
                     {/* Gradient accent line */}
@@ -184,13 +186,13 @@ export default async function LandingPage() {
                         )}
                       </div>
 
-                      <h3 className="font-bold text-lg text-slate-900 mb-2 tracking-tight">{uni.name}</h3>
-                      <p className="text-sm text-slate-400 leading-relaxed mb-5">{uni.description}</p>
+                      <h3 className="font-bold text-lg text-zinc-900 dark:text-zinc-50 mb-2 tracking-tight">{uni.name}</h3>
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-5">{uni.description}</p>
 
                       <div className={`text-xs font-mono px-3 py-2 rounded-lg inline-flex items-center gap-2 transition-all duration-300 ${
                         uni.status === "Live"
-                          ? "bg-slate-50 text-slate-400 group-hover:text-blue-600 group-hover:bg-blue-50"
-                          : "bg-slate-50/50 text-slate-300"
+                          ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 group-hover:text-blue-600 group-hover:bg-blue-50 dark:group-hover:bg-blue-900/30"
+                          : "bg-zinc-50/50 dark:bg-zinc-900/30 text-zinc-400 dark:text-zinc-600"
                       }`}>
                         <i className="fa-solid fa-globe text-[10px]" />
                         {uni.id}.sipadu.info
@@ -203,13 +205,13 @@ export default async function LandingPage() {
 
             {/* "More coming" card */}
             <StaggerItem>
-              <Card className="relative overflow-hidden h-full border-dashed border-slate-200 bg-transparent hover:bg-white/50 transition-all duration-500 flex items-center justify-center min-h-[240px]">
+              <Card className="relative overflow-hidden h-full border-dashed border-zinc-200 dark:border-zinc-800 bg-transparent hover:bg-white/50 dark:hover:bg-zinc-900/50 transition-all duration-500 flex items-center justify-center min-h-[240px]">
                 <CardContent className="p-7 text-center">
-                  <div className="h-14 w-14 rounded-2xl bg-slate-50 flex items-center justify-center ring-1 ring-slate-200 mx-auto mb-4">
-                    <i className="fa-solid fa-plus text-slate-300 text-xl" />
+                  <div className="h-14 w-14 rounded-2xl bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center ring-1 ring-zinc-200 dark:ring-zinc-700 mx-auto mb-4">
+                    <i className="fa-solid fa-plus text-zinc-300 dark:text-zinc-600 text-xl" />
                   </div>
-                  <h3 className="font-semibold text-slate-400 mb-1">Segera hadir</h3>
-                  <p className="text-xs text-slate-300">Universitas lainnya sedang disiapkan</p>
+                  <h3 className="font-semibold text-zinc-400 dark:text-zinc-500 mb-1">Segera hadir</h3>
+                  <p className="text-xs text-zinc-300 dark:text-zinc-600">Universitas lainnya sedang disiapkan</p>
                 </CardContent>
               </Card>
             </StaggerItem>
@@ -218,14 +220,14 @@ export default async function LandingPage() {
       </section>
 
       {/* ===== FEATURES GRID ===== */}
-      <section id="fitur" className="py-24 md:py-32 border-t border-slate-200/60">
+      <section id="fitur" className="py-24 md:py-32 border-t border-zinc-200/60 dark:border-zinc-800/60">
         <div className="container mx-auto px-6 max-w-6xl">
           <AnimateIn className="text-center mb-16">
             <span className="text-xs font-bold tracking-[0.2em] text-indigo-600 uppercase mb-4 block">Mengapa SiPadu</span>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4">
               Dibangun untuk <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-600">skala besar</span>
             </h2>
-            <p className="text-slate-400 max-w-xl mx-auto text-lg font-light">
+            <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto text-lg font-light">
               Infrastruktur modern yang siap menangani ratusan kampus secara bersamaan.
             </p>
           </AnimateIn>
@@ -233,12 +235,12 @@ export default async function LandingPage() {
           <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {FEATURES.map((feature) => (
               <StaggerItem key={feature.title}>
-                <div className="group p-7 rounded-2xl border border-slate-200/80 bg-white/70 hover:bg-white hover:border-slate-300 hover:shadow-lg hover:shadow-slate-100 transition-all duration-500">
+                <div className="group p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/50 hover:bg-white dark:hover:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-lg hover:shadow-zinc-100 dark:hover:shadow-black/50 transition-all duration-500">
                   <div className={`h-12 w-12 rounded-xl ${feature.bg} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
                     <i className={`${feature.icon} ${feature.color} text-lg`} />
                   </div>
-                  <h3 className="font-semibold text-slate-900 text-lg mb-2">{feature.title}</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">{feature.description}</p>
+                  <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 text-lg mb-2">{feature.title}</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">{feature.description}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -247,16 +249,16 @@ export default async function LandingPage() {
       </section>
 
       {/* ===== API PREVIEW ===== */}
-      <section id="api" className="py-24 md:py-32 border-t border-slate-200/60">
+      <section id="api" className="py-24 md:py-32 border-t border-zinc-200/60 dark:border-zinc-800/60">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <AnimateIn>
               <span className="text-xs font-bold tracking-[0.2em] text-emerald-600 uppercase mb-4 block">API Publik</span>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-6">
                 Data kampus,<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-cyan-600">satu endpoint.</span>
               </h2>
-              <p className="text-slate-400 text-lg leading-relaxed mb-8 font-light">
+              <p className="text-zinc-500 dark:text-zinc-400 text-lg leading-relaxed mb-8 font-light">
                 Akses jadwal, pengumuman, dan materi dari seluruh universitas yang terhubung melalui REST API yang gratis dan terbuka. Dokumentasi lengkap, response time &lt;200ms.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -268,16 +270,16 @@ export default async function LandingPage() {
             </AnimateIn>
 
             <AnimateIn delay={0.2}>
-              <div className="relative rounded-2xl overflow-hidden border border-slate-800 bg-[#1e1e2e] shadow-2xl">
+              <div className="relative rounded-2xl overflow-hidden border border-zinc-800 bg-[#1e1e2e] shadow-2xl">
                 {/* Window bar */}
-                <div className="flex items-center gap-2 px-5 py-3.5 border-b border-slate-700/50 bg-[#181825]">
+                <div className="flex items-center gap-2 px-5 py-3.5 border-b border-zinc-700/50 bg-[#181825]">
                   <span className="h-3 w-3 rounded-full bg-red-500/80" />
                   <span className="h-3 w-3 rounded-full bg-amber-500/80" />
                   <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
-                  <span className="ml-4 text-xs text-slate-500 font-mono">api-example.ts</span>
+                  <span className="ml-4 text-xs text-zinc-500 font-mono">api-example.ts</span>
                 </div>
                 {/* Code content */}
-                <pre className="p-6 text-sm font-mono leading-relaxed overflow-x-auto text-slate-300">
+                <pre className="p-6 text-sm font-mono leading-relaxed overflow-x-auto text-zinc-300">
                   <code>{API_EXAMPLE}</code>
                 </pre>
               </div>
@@ -287,20 +289,20 @@ export default async function LandingPage() {
       </section>
 
       {/* ===== ANALYTICS CHART ===== */}
-      <section id="statistik" className="py-24 md:py-32 border-t border-slate-200/60">
+      <section id="statistik" className="py-24 md:py-32 border-t border-zinc-200/60 dark:border-zinc-800/60">
         <div className="container mx-auto px-6 max-w-5xl">
           <AnimateIn className="text-center mb-12">
             <span className="text-xs font-bold tracking-[0.2em] text-purple-600 uppercase mb-4 block">Statistik</span>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4">
               Aktivitas <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">jaringan kampus</span>
             </h2>
-            <p className="text-slate-400 max-w-xl mx-auto text-lg font-light">
+            <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto text-lg font-light">
               Pemantauan real-time sinkronisasi data dari seluruh portal universitas.
             </p>
           </AnimateIn>
 
           <AnimateIn delay={0.2}>
-            <div className="rounded-2xl border border-slate-200/80 bg-white/70 backdrop-blur-sm p-2 shadow-sm">
+            <div className="rounded-2xl border border-zinc-200/80 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/50 backdrop-blur-sm p-2 shadow-sm">
               <RealTimeStats />
             </div>
           </AnimateIn>
@@ -308,25 +310,25 @@ export default async function LandingPage() {
       </section>
 
       {/* ===== CTA SECTION ===== */}
-      <section className="py-24 md:py-32 border-t border-slate-200/60">
+      <section className="py-24 md:py-32 border-t border-zinc-200/60 dark:border-zinc-800/60">
         <div className="container mx-auto px-6 max-w-4xl text-center">
           <AnimateIn>
-            <div className="relative rounded-3xl border border-slate-200 bg-gradient-to-b from-white to-slate-50/50 p-12 md:p-20 overflow-hidden shadow-sm">
+            <div className="relative rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-b from-white dark:from-zinc-900 to-zinc-50/50 dark:to-zinc-950/50 p-12 md:p-20 overflow-hidden shadow-sm">
               {/* Glow effect */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-blue-100/40 rounded-full blur-[80px] -translate-y-1/2" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-blue-100/40 dark:bg-blue-900/20 rounded-full blur-[80px] -translate-y-1/2" />
               
               <div className="relative z-10">
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-6">
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-6">
                   Siap untuk memulai?
                 </h2>
-                <p className="text-slate-400 text-lg max-w-lg mx-auto mb-10 font-light">
+                <p className="text-zinc-500 dark:text-zinc-400 text-lg max-w-lg mx-auto mb-10 font-light">
                   Jelajahi portal universitas yang sudah aktif, atau tunggu kampus Anda bergabung dalam jaringan SiPadu.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <a href="#universitas" className={buttonVariants({ className: "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-full px-8 py-6 text-base font-medium shadow-xl shadow-blue-500/25 transition-all duration-300 cursor-pointer" })}>
                     <i className="fa-solid fa-arrow-right mr-2" /> Pilih Kampus
                   </a>
-                  <a href="https://github.com/cxernlol/sipadu" target="_blank" rel="noopener noreferrer" className={buttonVariants({ className: "bg-white hover:bg-slate-50 text-slate-600 border border-slate-200 rounded-full px-8 py-6 text-base font-medium shadow-sm transition-all duration-300 cursor-pointer" })}>
+                  <a href="https://github.com/cxernlol/sipadu" target="_blank" rel="noopener noreferrer" className={buttonVariants({ className: "bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-800 rounded-full px-8 py-6 text-base font-medium shadow-sm transition-all duration-300 cursor-pointer" })}>
                     <i className="fa-brands fa-github mr-2" /> Beri Bintang di GitHub
                   </a>
                 </div>
@@ -337,7 +339,7 @@ export default async function LandingPage() {
       </section>
 
       {/* ===== FOOTER ===== */}
-      <footer className="border-t border-slate-200/60 bg-white">
+      <footer className="border-t border-zinc-200/60 dark:border-zinc-800/60 bg-white dark:bg-black">
         <div className="container mx-auto px-6 max-w-6xl py-16">
           <div className="grid md:grid-cols-4 gap-12 mb-12">
             {/* Brand */}
@@ -346,39 +348,39 @@ export default async function LandingPage() {
                 <div className="h-8 w-8 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center text-white text-xs shadow-lg shadow-blue-500/25">
                   <i className="fa-solid fa-graduation-cap" />
                 </div>
-                <span className="text-base font-semibold tracking-tight text-slate-900">
+                <span className="text-base font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
                   SiPadu<span className="text-blue-600">.info</span>
                 </span>
               </Link>
-              <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
+              <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-sm leading-relaxed">
                 Sistem Informasi Terpadu — Platform agregasi data akademik multi-universitas pertama di Indonesia. Sumber terbuka dan gratis untuk semua.
               </p>
             </div>
 
             {/* Links */}
             <div>
-              <h4 className="text-xs font-bold tracking-[0.15em] text-slate-400 uppercase mb-4">Platform</h4>
+              <h4 className="text-xs font-bold tracking-[0.15em] text-zinc-400 dark:text-zinc-500 uppercase mb-4">Platform</h4>
               <ul className="space-y-2.5 text-sm">
-                <li><Link href="/gunadarma" className="text-slate-400 hover:text-slate-700 transition-colors">Gunadarma</Link></li>
-                <li><Link href="/ui" className="text-slate-300 hover:text-slate-500 transition-colors">UI (Segera Hadir)</Link></li>
-                <li><Link href="/ugm" className="text-slate-300 hover:text-slate-500 transition-colors">UGM (Segera Hadir)</Link></li>
-                <li><Link href="/itb" className="text-slate-300 hover:text-slate-500 transition-colors">ITB (Segera Hadir)</Link></li>
+                <li><Link href="/gunadarma" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Gunadarma</Link></li>
+                <li><Link href="/ui" className="text-zinc-400 dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">UI (Segera Hadir)</Link></li>
+                <li><Link href="/ugm" className="text-zinc-400 dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">UGM (Segera Hadir)</Link></li>
+                <li><Link href="/itb" className="text-zinc-400 dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">ITB (Segera Hadir)</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-xs font-bold tracking-[0.15em] text-slate-400 uppercase mb-4">Legal</h4>
+              <h4 className="text-xs font-bold tracking-[0.15em] text-zinc-400 dark:text-zinc-500 uppercase mb-4">Legal</h4>
               <ul className="space-y-2.5 text-sm">
-                <li><Link href="/privacy" className="text-slate-400 hover:text-slate-700 transition-colors">Kebijakan Privasi</Link></li>
-                <li><Link href="/terms" className="text-slate-400 hover:text-slate-700 transition-colors">Syarat & Ketentuan</Link></li>
-                <li><a href="https://github.com/cxernlol/sipadu" className="text-slate-400 hover:text-slate-700 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><Link href="/privacy" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Kebijakan Privasi</Link></li>
+                <li><Link href="/terms" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Syarat & Ketentuan</Link></li>
+                <li><a href="https://github.com/cxernlol/sipadu" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a></li>
               </ul>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-slate-300">&copy; 2026 SiPadu.info &mdash; Agregator universitas sumber terbuka.</p>
-            <p className="text-xs text-slate-300">Dihosting di <i className="fa-solid fa-triangle text-slate-400 mx-1" /> Vercel</p>
+          <div className="pt-8 border-t border-zinc-100 dark:border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-xs text-zinc-400 dark:text-zinc-500">&copy; 2026 SiPadu.info &mdash; Agregator universitas sumber terbuka.</p>
+            <p className="text-xs text-zinc-400 dark:text-zinc-500">Dihosting di <i className="fa-solid fa-triangle text-zinc-500 dark:text-zinc-400 mx-1" /> Vercel</p>
           </div>
         </div>
       </footer>
