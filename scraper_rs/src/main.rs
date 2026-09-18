@@ -12,6 +12,7 @@ use tokio::task;
 
 use models::{Announcement, DateObj, Db, KalenderEvent, Materi};
 use utils::{get_indo_month, get_indo_month_abbr, is_older_than_three_months, parse_indo_date};
+use std::env;
 
 fn scrape_baak(browser: &Browser) -> Result<Vec<Announcement>> {
     info!("Memulai proses scraping BAAK...");
@@ -182,7 +183,20 @@ async fn main() -> Result<()> {
     // Inisialisasi logger
     env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
     
-    info!("Launching headless browser (Rust) dengan eksekusi paralel...");
+    let args: Vec<String> = env::args().collect();
+    let mut run_baak = true;
+    let mut run_lepkom = true;
+    
+    if args.len() > 1 {
+        let target = args[1].to_lowercase();
+        if target == "baak" {
+            run_lepkom = false;
+        } else if target == "lepkom" {
+            run_baak = false;
+        }
+    }
+    
+    info!("Launching headless browser (Rust)...");
     
     let browser_opts = LaunchOptions {
         headless: true,
@@ -190,35 +204,69 @@ async fn main() -> Result<()> {
         ..Default::default()
     };
     
-    // Wrap browser di Arc agar aman dipakai multi-threading
     let browser = Arc::new(Browser::new(browser_opts).context("Gagal menginisialisasi headless_chrome")?);
     
-    // Gunakan tokio spawn_blocking untuk menjalankan scraper secara konkuren (Paralel)
-    let browser_clone1 = Arc::clone(&browser);
-    let baak_task = task::spawn_blocking(move || {
-        scrape_baak(&browser_clone1)
-    });
+    let mut baak_data = vec![];
+    if run_baak {
+        let browser_clone1 = Arc::clone(&browser);
+        baak_data = task::spawn_blocking(move || scrape_baak(&browser_clone1))
+            .await??
+            .unwrap_or_default();
+    }
     
-    let browser_clone2 = Arc::clone(&browser);
-    let lepkom_task = task::spawn_blocking(move || {
-        scrape_lepkom(&browser_clone2)
-    });
+    let mut lepkom_data = (vec![], vec![], vec![]);
+    if run_lepkom {
+        let browser_clone2 = Arc::clone(&browser);
+        lepkom_data = task::spawn_blocking(move || scrape_lepkom(&browser_clone2))
+            .await??
+            .unwrap_or_default();
+    }
     
-    // Tunggu kedua task selesai
-    let (baak_result, lepkom_result) = tokio::join!(baak_task, lepkom_task);
+    // Baca db.json yang sudah ada
+    let cwd = std::env::current_dir().context("Gagal mendapatkan direktori kerja saat ini")?;
+    let db_path = if cwd.ends_with("scraper_rs") {
+        cwd.parent().unwrap().join("src").join("data").join("db.json")
+    } else {
+        cwd.join("src").join("data").join("db.json")
+    };
     
-    let baak_data = baak_result?.unwrap_or_else(|e| {
-        error!("Error di BAAK Scraper: {}", e);
-        vec![]
-    });
+    let mut existing_db = if db_path.exists() {
+        let content = fs::read_to_string(&db_path).unwrap_or_default();
+        serde_json::from_str::<Db>(&content).unwrap_or(Db {
+            announcements: vec![],
+            materi: vec![],
+            jadwal: vec![],
+            kalender: vec![],
+            last_updated: String::new(),
+        })
+    } else {
+        Db {
+            announcements: vec![],
+            materi: vec![],
+            jadwal: vec![],
+            kalender: vec![],
+            last_updated: String::new(),
+        }
+    };
     
-    let lepkom_data = lepkom_result?.unwrap_or_else(|e| {
-        error!("Error di LePKom Scraper: {}", e);
-        (vec![], vec![], vec![])
-    });
+    // Merge data
+    let mut all_announcements = Vec::new();
     
-    let mut all_announcements = baak_data;
-    all_announcements.extend(lepkom_data.0);
+    if run_baak && run_lepkom {
+        all_announcements.extend(baak_data);
+        all_announcements.extend(lepkom_data.0);
+    } else if run_baak {
+        all_announcements.extend(baak_data);
+        all_announcements.extend(existing_db.announcements.into_iter().filter(|a| a.source != "BAAK"));
+    } else if run_lepkom {
+        all_announcements.extend(existing_db.announcements.into_iter().filter(|a| a.source == "BAAK"));
+        all_announcements.extend(lepkom_data.0);
+    }
+    
+    if run_lepkom {
+        existing_db.materi = lepkom_data.1;
+        existing_db.kalender = lepkom_data.2;
+    }
     
     // Urutkan (sort) descending berdasarkan tanggal
     all_announcements.sort_by(|a, b| {
@@ -237,31 +285,18 @@ async fn main() -> Result<()> {
         db.cmp(&da)
     });
     
-    // Deduplikasi berdasarkan judul (agar tidak ada pengumuman kembar)
+    // Deduplikasi berdasarkan judul
     let mut seen_titles = std::collections::HashSet::new();
     all_announcements.retain(|a| seen_titles.insert(a.title.clone()));
     
-    let db = Db {
-        announcements: all_announcements,
-        materi: lepkom_data.1,
-        jadwal: vec![],
-        kalender: lepkom_data.2,
-        last_updated: Utc::now().to_rfc3339(),
-    };
-    
-    // Penulisan ke JSON
-    let cwd = std::env::current_dir().context("Gagal mendapatkan direktori kerja saat ini")?;
-    let db_path = if cwd.ends_with("scraper_rs") {
-        cwd.parent().unwrap().join("src").join("data").join("db.json")
-    } else {
-        cwd.join("src").join("data").join("db.json")
-    };
+    existing_db.announcements = all_announcements;
+    existing_db.last_updated = Utc::now().to_rfc3339();
     
     if let Some(parent) = db_path.parent() {
         fs::create_dir_all(parent).context("Gagal membuat direktori data")?;
     }
     
-    let json_str = serde_json::to_string_pretty(&db).context("Gagal melakukan serialisasi data ke JSON")?;
+    let json_str = serde_json::to_string_pretty(&existing_db).context("Gagal melakukan serialisasi data ke JSON")?;
     fs::write(&db_path, json_str).context("Gagal menyimpan file db.json")?;
     
     info!("Scraping selesai! Data disimpan di {:?}", db_path);
