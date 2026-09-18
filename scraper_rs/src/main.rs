@@ -1,144 +1,57 @@
-use anyhow::Result;
+mod models;
+mod utils;
+
+use anyhow::{Context, Result};
+use chrono::{NaiveDate, Utc};
 use headless_chrome::{Browser, LaunchOptions};
-use serde::{Deserialize, Serialize};
+use log::{error, info, warn};
 use std::fs;
 use std::path::Path;
-use chrono::{Datelike, NaiveDate, Utc};
-use std::collections::HashMap;
-use std::time::Duration;
+use std::sync::Arc;
+use tokio::task;
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-struct DateObj {
-    day: String,
-    month: String,
-    year: String,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-struct Announcement {
-    id: String,
-    date: DateObj,
-    title: String,
-    description: String,
-    source: String,
-    tags: Vec<String>,
-    link: Option<String>,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-struct Materi {
-    id: String,
-    name: String,
-    level: String,
-    topics: Vec<String>,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-struct KalenderEvent {
-    id: String,
-    name: String,
-    subtitle: String,
-    date: String,
-    locations: String,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-struct Db {
-    announcements: Vec<Announcement>,
-    materi: Vec<Materi>,
-    jadwal: Vec<String>, // Kosong (dikosongkan per script asli)
-    kalender: Vec<KalenderEvent>,
-    #[serde(rename = "lastUpdated")]
-    last_updated: String,
-}
-
-// Map nama bulan Indo ke nomor bulan (1-indexed)
-fn get_indo_month(month: &str) -> Option<u32> {
-    match month.to_lowercase().as_str() {
-        "januari" => Some(1),
-        "februari" => Some(2),
-        "maret" => Some(3),
-        "april" => Some(4),
-        "mei" => Some(5),
-        "juni" => Some(6),
-        "juli" => Some(7),
-        "agustus" => Some(8),
-        "september" => Some(9),
-        "oktober" => Some(10),
-        "november" => Some(11),
-        "desember" => Some(12),
-        _ => None,
-    }
-}
-
-fn parse_indo_date(date_str: &str) -> Option<NaiveDate> {
-    // Format: "Kamis, 17 September 2026" atau "17 September 2026"
-    let parts: Vec<&str> = date_str.split(',').collect();
-    let date_part = if parts.len() >= 2 {
-        parts[1].trim()
-    } else {
-        parts[0].trim()
-    };
-    
-    let comp: Vec<&str> = date_part.split_whitespace().collect();
-    if comp.len() >= 3 {
-        let day: u32 = comp[0].parse().ok()?;
-        let month = get_indo_month(comp[1])?;
-        let year: i32 = comp[2].parse().ok()?;
-        return NaiveDate::from_ymd_opt(year, month, day);
-    }
-    None
-}
-
-fn is_older_than_three_months(date: &NaiveDate) -> bool {
-    let now = Utc::now().naive_utc().date();
-    // Kira-kira 90 hari
-    let duration = now.signed_duration_since(*date);
-    duration.num_days() > 90
-}
+use models::{Announcement, DateObj, Db, KalenderEvent, Materi};
+use utils::{get_indo_month, get_indo_month_abbr, is_older_than_three_months, parse_indo_date};
 
 fn scrape_baak(browser: &Browser) -> Result<Vec<Announcement>> {
-    println!("Scraping BAAK...");
-    let tab = browser.new_tab()?;
-    // Timeout lebih panjang untuk melewati WAF Cloudflare
-    tab.navigate_to("https://baak.gunadarma.ac.id/")?;
-    tab.wait_until_navigated()?;
+    info!("Memulai proses scraping BAAK...");
+    let tab = browser.new_tab().context("Gagal membuka tab baru untuk BAAK")?;
     
-    // Tunggu selektor muncul (atau WAF selesai)
-    tab.wait_for_element(".trow")?;
+    tab.navigate_to("https://baak.gunadarma.ac.id/")
+        .context("Gagal navigasi ke URL BAAK")?;
+    tab.wait_until_navigated().context("Gagal menunggu halaman BAAK selesai dimuat")?;
+    
+    // Tunggu selektor muncul (mengakomodasi WAF Cloudflare)
+    if let Err(e) = tab.wait_for_element(".trow") {
+        warn!("Selektor BAAK tidak ditemukan atau terkena limitasi jaringan: {}", e);
+        return Ok(vec![]);
+    }
     
     let mut announcements = Vec::new();
-    let rows = tab.find_elements(".trow")?;
+    let rows = tab.find_elements(".trow").context("Gagal menemukan elemen baris BAAK")?;
     
     for (i, row) in rows.iter().enumerate() {
-        let title_el = row.find_element(".title a");
-        if title_el.is_err() { continue; }
-        let title_el = title_el.unwrap();
+        let title_el = match row.find_element(".title a") {
+            Ok(el) => el,
+            Err(_) => continue,
+        };
         
-        let title = title_el.get_inner_text()?;
-        let link = title_el.get_attribute_value("href")?.unwrap_or_default();
+        let title = title_el.get_inner_text().unwrap_or_default();
+        let link = title_el.get_attribute_value("href").unwrap_or_default().unwrap_or_default();
         
-        let mut date_str = "Kamis, 17 September 2026".to_string(); // Fallback
-        if let Ok(span) = row.find_element("span") {
-            date_str = span.get_inner_text()?;
-        }
+        let date_str = row.find_element("span")
+            .and_then(|span| span.get_inner_text())
+            .unwrap_or_else(|_| "Kamis, 17 September 2026".to_string());
         
-        let description = row.get_inner_text()?.chars().take(150).collect::<String>() + "...";
-        
+        let description = row.get_inner_text().unwrap_or_default().chars().take(150).collect::<String>() + "...";
         let parsed_date = parse_indo_date(&date_str).unwrap_or_else(|| Utc::now().naive_utc().date());
         
         if !is_older_than_three_months(&parsed_date) {
-            let month_abbr = match parsed_date.month() {
-                1 => "JAN", 2 => "FEB", 3 => "MAR", 4 => "APR", 5 => "MEI", 6 => "JUN",
-                7 => "JUL", 8 => "AGU", 9 => "SEP", 10 => "OKT", 11 => "NOV", 12 => "DES",
-                _ => "JAN"
-            };
-            
             announcements.push(Announcement {
                 id: format!("baak-{}", i),
                 date: DateObj {
                     day: format!("{:02}", parsed_date.day()),
-                    month: month_abbr.to_string(),
+                    month: get_indo_month_abbr(parsed_date.month()).to_string(),
                     year: parsed_date.year().to_string(),
                 },
                 title: format!("[BAAK] {}", title.trim()),
@@ -150,16 +63,19 @@ fn scrape_baak(browser: &Browser) -> Result<Vec<Announcement>> {
         }
     }
     
+    info!("Berhasil scrape {} pengumuman dari BAAK", announcements.len());
     Ok(announcements)
 }
 
 fn scrape_lepkom(browser: &Browser) -> Result<(Vec<Announcement>, Vec<Materi>, Vec<KalenderEvent>)> {
-    println!("Scraping VM LePKom...");
-    let tab = browser.new_tab()?;
-    tab.navigate_to("https://vm.lepkom.gunadarma.ac.id/")?;
-    tab.wait_until_navigated()?;
+    info!("Memulai proses scraping VM LePKom...");
+    let tab = browser.new_tab().context("Gagal membuka tab baru untuk LePKom")?;
     
-    std::thread::sleep(Duration::from_secs(2)); // Beri waktu transisi jika ada WAF
+    tab.navigate_to("https://vm.lepkom.gunadarma.ac.id/")
+        .context("Gagal navigasi ke URL LePKom")?;
+    tab.wait_until_navigated().context("Gagal menunggu halaman LePKom selesai dimuat")?;
+    
+    std::thread::sleep(std::time::Duration::from_secs(2));
     
     let mut announcements = Vec::new();
     let mut materi_list = Vec::new();
@@ -169,41 +85,32 @@ fn scrape_lepkom(browser: &Browser) -> Result<(Vec<Announcement>, Vec<Materi>, V
     if let Ok(news_items) = tab.find_elements(".recent-news") {
         for (i, item) in news_items.iter().enumerate() {
             if let Ok(title_el) = item.find_element("h6 a") {
-                let mut raw_title = title_el.get_inner_text()?;
-                let link = title_el.get_attribute_value("href")?.unwrap_or_default();
+                let mut raw_title = title_el.get_inner_text().unwrap_or_default();
+                let link = title_el.get_attribute_value("href").unwrap_or_default().unwrap_or_default();
                 
-                // Hapus angka di depan judul (misal "1. ")
                 if let Some(idx) = raw_title.find(' ') {
                     if raw_title[..idx].chars().all(char::is_numeric) || raw_title.starts_with(&format!("{}.", i+1)) {
                         raw_title = raw_title[idx+1..].to_string();
                     }
                 }
                 
-                let mut desc = "".to_string();
-                if let Ok(desc_el) = item.find_element(".text-justify") {
-                    desc = desc_el.get_inner_text()?.chars().take(150).collect::<String>() + "...";
-                }
+                let desc = item.find_element(".text-justify")
+                    .and_then(|el| el.get_inner_text())
+                    .unwrap_or_default()
+                    .chars().take(150).collect::<String>() + "...";
                 
-                let mut date_str = "".to_string();
-                if let Ok(media_post) = item.find_elements(".media-post li") {
-                    if !media_post.is_empty() {
-                        date_str = media_post[0].get_inner_text()?;
-                    }
-                }
+                let date_str = item.find_elements(".media-post li")
+                    .ok()
+                    .and_then(|list| list.get(0).and_then(|el| el.get_inner_text().ok()))
+                    .unwrap_or_default();
                 
                 if let Some(parsed_date) = parse_indo_date(&date_str) {
                     if !is_older_than_three_months(&parsed_date) {
-                        let month_abbr = match parsed_date.month() {
-                            1 => "JAN", 2 => "FEB", 3 => "MAR", 4 => "APR", 5 => "MEI", 6 => "JUN",
-                            7 => "JUL", 8 => "AGU", 9 => "SEP", 10 => "OKT", 11 => "NOV", 12 => "DES",
-                            _ => "JAN"
-                        };
-                        
                         announcements.push(Announcement {
                             id: format!("lepkom-{}", i),
                             date: DateObj {
                                 day: format!("{:02}", parsed_date.day()),
-                                month: month_abbr.to_string(),
+                                month: get_indo_month_abbr(parsed_date.month()).to_string(),
                                 year: parsed_date.year().to_string(),
                             },
                             title: raw_title.trim().to_string(),
@@ -222,12 +129,8 @@ fn scrape_lepkom(browser: &Browser) -> Result<(Vec<Announcement>, Vec<Materi>, V
     if let Ok(courses) = tab.find_elements(".cours-bx") {
         for (i, course) in courses.iter().enumerate() {
             if let Ok(title_el) = course.find_element("h5 a") {
-                let name = title_el.get_inner_text()?;
-                
-                let mut level = "".to_string();
-                if let Ok(lvl_el) = course.find_element(".info-bx span") {
-                    level = lvl_el.get_inner_text()?;
-                }
+                let name = title_el.get_inner_text().unwrap_or_default();
+                let level = course.find_element(".info-bx span").and_then(|el| el.get_inner_text()).unwrap_or_default();
                 
                 let mut topics = Vec::new();
                 if let Ok(list_items) = course.find_elements(".cours-more-info ol li") {
@@ -253,8 +156,8 @@ fn scrape_lepkom(browser: &Browser) -> Result<(Vec<Announcement>, Vec<Materi>, V
         for (i, row) in rows.iter().enumerate() {
             if let Ok(cols) = row.find_elements("td") {
                 if cols.len() >= 2 {
-                    let name = cols[0].get_inner_text()?;
-                    let date = cols[1].get_inner_text()?;
+                    let name = cols[0].get_inner_text().unwrap_or_default();
+                    let date = cols[1].get_inner_text().unwrap_or_default();
                     
                     if !name.trim().is_empty() && !date.trim().is_empty() {
                         kalender_list.push(KalenderEvent {
@@ -270,12 +173,16 @@ fn scrape_lepkom(browser: &Browser) -> Result<(Vec<Announcement>, Vec<Materi>, V
         }
     }
     
+    info!("Berhasil scrape {} pengumuman, {} materi dari VM LePKom", announcements.len(), materi_list.len());
     Ok((announcements, materi_list, kalender_list))
 }
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    println!("Launching headless browser (Rust)...");
+    // Inisialisasi logger
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+    
+    info!("Launching headless browser (Rust) dengan eksekusi paralel...");
     
     let browser_opts = LaunchOptions {
         headless: true,
@@ -283,15 +190,37 @@ async fn main() -> Result<()> {
         ..Default::default()
     };
     
-    let browser = Browser::new(browser_opts)?;
+    // Wrap browser di Arc agar aman dipakai multi-threading
+    let browser = Arc::new(Browser::new(browser_opts).context("Gagal menginisialisasi headless_chrome")?);
     
-    let baak = scrape_baak(&browser).unwrap_or_default();
-    let lepkom = scrape_lepkom(&browser).unwrap_or_default();
+    // Gunakan tokio spawn_blocking untuk menjalankan scraper secara konkuren (Paralel)
+    let browser_clone1 = Arc::clone(&browser);
+    let baak_task = task::spawn_blocking(move || {
+        scrape_baak(&browser_clone1)
+    });
     
-    let mut all_announcements = baak;
-    all_announcements.extend(lepkom.0);
+    let browser_clone2 = Arc::clone(&browser);
+    let lepkom_task = task::spawn_blocking(move || {
+        scrape_lepkom(&browser_clone2)
+    });
     
-    // Sort descending by date
+    // Tunggu kedua task selesai
+    let (baak_result, lepkom_result) = tokio::join!(baak_task, lepkom_task);
+    
+    let baak_data = baak_result?.unwrap_or_else(|e| {
+        error!("Error di BAAK Scraper: {}", e);
+        vec![]
+    });
+    
+    let lepkom_data = lepkom_result?.unwrap_or_else(|e| {
+        error!("Error di LePKom Scraper: {}", e);
+        (vec![], vec![], vec![])
+    });
+    
+    let mut all_announcements = baak_data;
+    all_announcements.extend(lepkom_data.0);
+    
+    // Urutkan (sort) descending berdasarkan tanggal
     all_announcements.sort_by(|a, b| {
         let da = NaiveDate::from_ymd_opt(
             a.date.year.parse().unwrap_or(2026),
@@ -310,15 +239,14 @@ async fn main() -> Result<()> {
     
     let db = Db {
         announcements: all_announcements,
-        materi: lepkom.1,
+        materi: lepkom_data.1,
         jadwal: vec![],
-        kalender: lepkom.2,
+        kalender: lepkom_data.2,
         last_updated: Utc::now().to_rfc3339(),
     };
     
-    // Tulis ke src/data/db.json
-    let cwd = std::env::current_dir()?;
-    // Memperhitungkan kemungkinan kita me-run nya dari dalam /scraper_rs atau root /
+    // Penulisan ke JSON
+    let cwd = std::env::current_dir().context("Gagal mendapatkan direktori kerja saat ini")?;
     let db_path = if cwd.ends_with("scraper_rs") {
         cwd.parent().unwrap().join("src").join("data").join("db.json")
     } else {
@@ -326,12 +254,12 @@ async fn main() -> Result<()> {
     };
     
     if let Some(parent) = db_path.parent() {
-        fs::create_dir_all(parent)?;
+        fs::create_dir_all(parent).context("Gagal membuat direktori data")?;
     }
     
-    let json_str = serde_json::to_string_pretty(&db)?;
-    fs::write(&db_path, json_str)?;
+    let json_str = serde_json::to_string_pretty(&db).context("Gagal melakukan serialisasi data ke JSON")?;
+    fs::write(&db_path, json_str).context("Gagal menyimpan file db.json")?;
     
-    println!("Scraping complete! Saved to {:?}", db_path);
+    info!("Scraping selesai! Data disimpan di {:?}", db_path);
     Ok(())
 }
