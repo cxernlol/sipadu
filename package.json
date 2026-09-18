@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "scrape": "node scripts/scrape.js"
+    "scrape": "cd scraper_rs && cargo run --release"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
