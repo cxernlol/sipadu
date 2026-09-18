@@ -68,6 +68,79 @@ fn scrape_baak(browser: &Browser) -> Result<Vec<Announcement>> {
     Ok(announcements)
 }
 
+fn scrape_studentsite(browser: &Browser) -> Result<Vec<Announcement>> {
+    info!("Memulai proses scraping StudentSite...");
+    let tab = browser.new_tab().context("Gagal membuka tab baru untuk StudentSite")?;
+    
+    tab.navigate_to("https://studentsite.gunadarma.ac.id/pengumuman")
+        .context("Gagal navigasi ke URL StudentSite")?;
+    tab.wait_until_navigated().context("Gagal menunggu halaman StudentSite selesai dimuat")?;
+    
+    std::thread::sleep(std::time::Duration::from_secs(2));
+    
+    let mut announcements = Vec::new();
+    
+    if let Ok(items) = tab.find_elements("a[href^='/pengumuman/']") {
+        for (i, item) in items.iter().enumerate() {
+            if let Ok(title_el) = item.find_element("h3") {
+                let title = title_el.get_inner_text().unwrap_or_default();
+                let href = item.get_attribute_value("href").unwrap_or_default().unwrap_or_default();
+                let link = format!("https://studentsite.gunadarma.ac.id{}", href);
+                
+                let desc = item.find_element("p")
+                    .and_then(|el| el.get_inner_text())
+                    .unwrap_or_default()
+                    .chars().take(150).collect::<String>() + "...";
+                
+                // Get the text from the date element (the one with the calendar icon)
+                let date_str = item.find_element(".text-gray-400")
+                    .and_then(|el| el.get_inner_text())
+                    .unwrap_or_default();
+                
+                let mut tags = vec!["StudentSite".to_string()];
+                
+                if let Ok(spans) = item.find_elements("span.rounded-full") {
+                    for span in spans {
+                        if let Ok(tag_text) = span.get_inner_text() {
+                            let clean_tag = tag_text.trim();
+                            if !clean_tag.is_empty() {
+                                // Capitalize first letter
+                                let mut chars = clean_tag.chars();
+                                let capitalized = match chars.next() {
+                                    None => String::new(),
+                                    Some(f) => f.to_uppercase().collect::<String>() + chars.as_str(),
+                                };
+                                tags.push(capitalized);
+                            }
+                        }
+                    }
+                }
+                
+                if let Some(parsed_date) = parse_indo_date(&date_str) {
+                    if !is_older_than_three_months(&parsed_date) {
+                        announcements.push(Announcement {
+                            id: format!("studentsite-{}", i),
+                            date: DateObj {
+                                day: format!("{:02}", parsed_date.day()),
+                                month: get_indo_month_abbr(parsed_date.month()).to_string(),
+                                year: parsed_date.year().to_string(),
+                            },
+                            title: title.trim().to_string(),
+                            description: desc.replace('\n', " "),
+                            source: "StudentSite".to_string(),
+                            tags,
+                            link: Some(link),
+                        });
+                    }
+                }
+            }
+        }
+    }
+    
+    info!("Berhasil scrape {} pengumuman dari StudentSite", announcements.len());
+    Ok(announcements)
+}
+
 fn scrape_lepkom(browser: &Browser) -> Result<(Vec<Announcement>, Vec<Materi>, Vec<KalenderEvent>)> {
     info!("Memulai proses scraping VM LePKom...");
     let tab = browser.new_tab().context("Gagal membuka tab baru untuk LePKom")?;
@@ -186,13 +259,19 @@ async fn main() -> Result<()> {
     let args: Vec<String> = env::args().collect();
     let mut run_baak = true;
     let mut run_lepkom = true;
+    let mut run_studentsite = true;
     
     if args.len() > 1 {
         let target = args[1].to_lowercase();
         if target == "baak" {
             run_lepkom = false;
+            run_studentsite = false;
         } else if target == "lepkom" {
             run_baak = false;
+            run_studentsite = false;
+        } else if target == "studentsite" {
+            run_baak = false;
+            run_lepkom = false;
         }
     }
     
@@ -218,6 +297,14 @@ async fn main() -> Result<()> {
     if run_lepkom {
         let browser_clone2 = Arc::clone(&browser);
         lepkom_data = task::spawn_blocking(move || scrape_lepkom(&browser_clone2))
+            .await??
+            .unwrap_or_default();
+    }
+    
+    let mut studentsite_data = vec![];
+    if run_studentsite {
+        let browser_clone3 = Arc::clone(&browser);
+        studentsite_data = task::spawn_blocking(move || scrape_studentsite(&browser_clone3))
             .await??
             .unwrap_or_default();
     }
@@ -252,16 +339,27 @@ async fn main() -> Result<()> {
     // Merge data
     let mut all_announcements = Vec::new();
     
-    if run_baak && run_lepkom {
+    // Tambahkan data hasil scrape terbaru
+    if run_baak {
         all_announcements.extend(baak_data);
-        all_announcements.extend(lepkom_data.0);
-    } else if run_baak {
-        all_announcements.extend(baak_data);
-        all_announcements.extend(existing_db.announcements.into_iter().filter(|a| a.source != "BAAK"));
-    } else if run_lepkom {
-        all_announcements.extend(existing_db.announcements.into_iter().filter(|a| a.source == "BAAK"));
+    }
+    if run_lepkom {
         all_announcements.extend(lepkom_data.0);
     }
+    if run_studentsite {
+        all_announcements.extend(studentsite_data);
+    }
+    
+    // Pertahankan data lama yang tidak sedang di-scrape
+    let old_announcements = existing_db.announcements.into_iter().filter(|a| {
+        let mut keep = true;
+        if run_baak && a.source == "BAAK" { keep = false; }
+        if run_lepkom && a.source == "VM LePKom" { keep = false; }
+        if run_studentsite && a.source == "StudentSite" { keep = false; }
+        keep
+    });
+    
+    all_announcements.extend(old_announcements);
     
     if run_lepkom {
         existing_db.materi = lepkom_data.1;
