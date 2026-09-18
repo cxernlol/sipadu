@@ -50,7 +50,16 @@ export default async function Home() {
   const topUpdates = announcements.slice(0, 3); // Take top 3 for the feed
 
   return (
-    <>
+    <div className="min-h-screen relative overflow-hidden bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50">
+      {/* ===== AMBIENT BACKGROUND ===== */}
+      <div className="fixed inset-0 -z-10">
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-[128px] animate-pulse" />
+        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-indigo-200/20 dark:bg-indigo-900/20 rounded-full blur-[128px] animate-pulse [animation-delay:2s]" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-200/15 dark:bg-blue-900/15 rounded-full blur-[128px]" />
+        {/* Grid overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
+      </div>
+
       {/* Top Banner */}
       <div className={`${currentUni.color} text-white py-2.5 text-sm overflow-hidden relative flex items-center border-b border-blue-700/50 shadow-inner`}>
         <div className="container mx-auto px-4 max-w-6xl flex items-center">
@@ -144,7 +153,7 @@ export default async function Home() {
       </div>
 
       {/* Features Section */}
-      <div className="bg-white dark:bg-black border-t dark:border-zinc-800 py-20 overflow-hidden">
+      <div className="bg-white/50 dark:bg-black/50 backdrop-blur-xl border-t dark:border-zinc-800 py-20 overflow-hidden">
         <div className="container mx-auto px-4 max-w-6xl">
           <AnimateIn delay={0.2} className="text-center mb-16">
             <span className="text-xs font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase mb-4 block">Fitur</span>
@@ -217,7 +226,7 @@ export default async function Home() {
       </div>
 
       {/* Kalender Akademik Section */}
-      <div className="bg-white dark:bg-black border-t dark:border-zinc-800 py-20 overflow-hidden">
+      <div className="bg-transparent border-t dark:border-zinc-800 py-20 overflow-hidden">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <AnimateIn delay={0.2}>
@@ -238,9 +247,9 @@ export default async function Home() {
             </AnimateIn>
           </div>
 
-          <AnimateIn delay={0.4} className="bg-white dark:bg-zinc-900 rounded-xl border border-slate-200 dark:border-zinc-800 shadow-sm overflow-hidden mb-8">
+          <AnimateIn delay={0.4} className="bg-white/70 dark:bg-zinc-900/50 backdrop-blur-md rounded-xl border border-slate-200 dark:border-zinc-800 shadow-sm overflow-hidden mb-8">
             <Table>
-              <TableHeader className="bg-slate-50/80 dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-800">
+              <TableHeader className="bg-slate-50/50 dark:bg-zinc-900/50 border-b border-slate-200 dark:border-zinc-800">
                 <TableRow className="hover:bg-transparent border-slate-200 dark:border-zinc-800">
                   <TableHead className="w-2/3 font-semibold text-slate-900 dark:text-zinc-50 py-4 px-6">Kegiatan Akademik</TableHead>
                   <TableHead className="font-semibold text-slate-900 dark:text-zinc-50 py-4 px-6">Tanggal Pelaksanaan</TableHead>
@@ -273,7 +282,7 @@ export default async function Home() {
       </div>
 
       {/* Live Feed Section */}
-      <div className="bg-slate-50 dark:bg-zinc-950 border-t dark:border-zinc-800 py-20 overflow-hidden">
+      <div className="bg-slate-50/50 dark:bg-zinc-950/50 backdrop-blur-xl border-t dark:border-zinc-800 py-20 overflow-hidden">
         <div className="container mx-auto px-4 max-w-6xl">
           <AnimateIn delay={0.2} className="mb-10">
             <span className="text-xs font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase mb-2 block">Informasi Terbaru</span>
@@ -286,7 +295,7 @@ export default async function Home() {
           <GunadarmaFeed announcements={announcements} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
