@@ -97,17 +97,17 @@ export default async function Home() {
         
         {/* Hero Section */}
         <AnimateIn delay={0.1} className="text-center max-w-3xl flex flex-col items-center">
-          <div className={`inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full text-sm font-medium ${currentUni.iconColor} border shadow-sm mb-12`}>
+          <div className={`inline-flex items-center gap-2 bg-white dark:bg-zinc-900 px-4 py-1.5 rounded-full text-sm font-medium ${currentUni.iconColor} dark:text-blue-400 border dark:border-zinc-800 shadow-sm mb-12`}>
             <span className={`h-2 w-2 rounded-full ${currentUni.badge}`} />
             {currentUni.name}
           </div>
           
-          <h1 className="font-serif text-5xl md:text-7xl leading-tight mb-6 tracking-tight text-slate-900">
+          <h1 className="font-serif text-5xl md:text-7xl leading-tight mb-6 tracking-tight text-slate-900 dark:text-zinc-50">
             Semua informasi<br />
-            kampus, <span className={currentUni.iconColor}>satu<br />tempat.</span>
+            kampus, <span className={`${currentUni.iconColor} dark:text-blue-400`}>satu<br />tempat.</span>
           </h1>
           
-          <p className="text-lg text-slate-500 mb-10 max-w-xl">
+          <p className="text-lg text-slate-500 dark:text-zinc-400 mb-10 max-w-xl">
             Pengumuman, jadwal kursus, materi, dan agenda dari BAAK & VM LePKom &mdash; terpadu, real-time, tanpa login.
           </p>
           
@@ -120,35 +120,35 @@ export default async function Home() {
             </Link>
             <Link 
               href="/gunadarma/lepkom/jadwal" 
-              className="bg-white hover:bg-slate-50 text-blue-600 border border-blue-600 px-6 py-3 rounded-lg font-semibold transition-colors"
+              className="bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 text-blue-600 dark:text-blue-400 border border-blue-600 dark:border-blue-800 px-6 py-3 rounded-lg font-semibold transition-colors"
             >
               Jadwal VM LePKom
             </Link>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-12 md:gap-24 border-t pt-10 w-full">
+          <div className="flex flex-wrap justify-center gap-12 md:gap-24 border-t dark:border-zinc-800 pt-10 w-full">
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-slate-900 mb-1">2</h2>
-              <p className="text-sm text-slate-500">Sumber Data</p>
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-zinc-50 mb-1">2</h2>
+              <p className="text-sm text-slate-500 dark:text-zinc-400">Sumber Data</p>
             </div>
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-slate-900 mb-1">5+</h2>
-              <p className="text-sm text-slate-500">Wilayah</p>
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-zinc-50 mb-1">5+</h2>
+              <p className="text-sm text-slate-500 dark:text-zinc-400">Wilayah</p>
             </div>
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-slate-900 mb-1">0</h2>
-              <p className="text-sm text-slate-500">Login Dibutuhkan</p>
+              <h2 className="text-3xl font-bold text-slate-900 dark:text-zinc-50 mb-1">0</h2>
+              <p className="text-sm text-slate-500 dark:text-zinc-400">Login Dibutuhkan</p>
             </div>
           </div>
         </AnimateIn>
       </div>
 
       {/* Features Section */}
-      <div className="bg-white border-t py-20 overflow-hidden">
+      <div className="bg-white dark:bg-black border-t dark:border-zinc-800 py-20 overflow-hidden">
         <div className="container mx-auto px-4 max-w-6xl">
           <AnimateIn delay={0.2} className="text-center mb-16">
-            <span className="text-xs font-bold tracking-widest text-blue-600 uppercase mb-4 block">Fitur</span>
-            <h2 className="font-serif text-4xl text-slate-900">Apa saja yang tersedia?</h2>
+            <span className="text-xs font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase mb-4 block">Fitur</span>
+            <h2 className="font-serif text-4xl text-slate-900 dark:text-zinc-50">Apa saja yang tersedia?</h2>
           </AnimateIn>
 
           <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -156,7 +156,7 @@ export default async function Home() {
               <Link href="/gunadarma/baak/pengumuman" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-bullhorn text-2xl text-blue-500 group-hover:scale-110 transition-transform"></i>}
-                iconBg="bg-blue-50"
+                iconBg="bg-blue-50 dark:bg-blue-900/30"
                 title="Pengumuman BAAK"
                 description="Info akademik dan jadwal perkuliahan resmi dari BAAK."
               />
@@ -166,7 +166,7 @@ export default async function Home() {
               <Link href="/gunadarma/lepkom/pengumuman" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-laptop-code text-2xl text-red-500 group-hover:scale-110 transition-transform"></i>}
-                iconBg="bg-red-50"
+                iconBg="bg-red-50 dark:bg-red-900/30"
                 title="Pengumuman LePKom"
                 description="Info terbaru seputar pendaftaran dan kegiatan VM LePKom."
               />
@@ -176,7 +176,7 @@ export default async function Home() {
               <Link href="/gunadarma/lepkom/jadwal" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-calendar text-2xl text-purple-500 group-hover:scale-110 transition-transform"></i>}
-                iconBg="bg-purple-50"
+                iconBg="bg-purple-50 dark:bg-purple-900/30"
                 title="Jadwal Kursus"
                 description="Kursus reguler, pengulangan, dan kloter per wilayah kampus."
                 />
@@ -186,7 +186,7 @@ export default async function Home() {
               <Link href="/gunadarma/lepkom/materi" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-book-open text-2xl text-teal-500 group-hover:scale-110 transition-transform"></i>}
-                iconBg="bg-teal-50"
+                iconBg="bg-teal-50 dark:bg-teal-900/30"
                 title="Materi Kursus"
                 description="Daftar materi Tingkat 1 - 4 dari seluruh program kursus LePKom."
                 />
@@ -196,7 +196,7 @@ export default async function Home() {
               <Link href="/gunadarma/lepkom/kalender" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-calendar-days text-2xl text-orange-500 group-hover:scale-110 transition-transform"></i>}
-                iconBg="bg-orange-50"
+                iconBg="bg-orange-50 dark:bg-orange-900/30"
                 title="Kalender LePKom"
                 description="Tanggal penting semester, libur, dan periode pengulangan kursus."
                 />
@@ -206,7 +206,7 @@ export default async function Home() {
               <Link href="/gunadarma/baak/kalender" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-calendar-check text-2xl text-green-500 group-hover:scale-110 transition-transform"></i>}
-                iconBg="bg-green-50"
+                iconBg="bg-green-50 dark:bg-green-900/30"
                 title="Kalender BAAK"
                 description="Jadwal kegiatan akademik, KRS, UTS, dan UAS resmi Universitas Gunadarma."
                 />
@@ -217,13 +217,13 @@ export default async function Home() {
       </div>
 
       {/* Kalender Akademik Section */}
-      <div className="bg-white border-t py-20 overflow-hidden">
+      <div className="bg-white dark:bg-black border-t dark:border-zinc-800 py-20 overflow-hidden">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <AnimateIn delay={0.2}>
-              <span className="text-xs font-bold tracking-widest text-blue-600 uppercase mb-2 block">BAAK GUNADARMA</span>
-              <h2 className="font-serif text-4xl text-slate-900">Kalender Akademik</h2>
-              <p className="text-slate-500 mt-2 max-w-2xl">
+              <span className="text-xs font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase mb-2 block">BAAK GUNADARMA</span>
+              <h2 className="font-serif text-4xl text-slate-900 dark:text-zinc-50">Kalender Akademik</h2>
+              <p className="text-slate-500 dark:text-zinc-400 mt-2 max-w-2xl">
                 Jadwal kegiatan akademik Ganjil (PTA) 2026/2027 Universitas Gunadarma.
               </p>
             </AnimateIn>
@@ -238,23 +238,23 @@ export default async function Home() {
             </AnimateIn>
           </div>
 
-          <AnimateIn delay={0.4} className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden mb-8">
+          <AnimateIn delay={0.4} className="bg-white dark:bg-zinc-900 rounded-xl border border-slate-200 dark:border-zinc-800 shadow-sm overflow-hidden mb-8">
             <Table>
-              <TableHeader className="bg-slate-50/80 border-b border-slate-200">
-                <TableRow className="hover:bg-transparent">
-                  <TableHead className="w-2/3 font-semibold text-slate-900 py-4 px-6">Kegiatan Akademik</TableHead>
-                  <TableHead className="font-semibold text-slate-900 py-4 px-6">Tanggal Pelaksanaan</TableHead>
+              <TableHeader className="bg-slate-50/80 dark:bg-zinc-900 border-b border-slate-200 dark:border-zinc-800">
+                <TableRow className="hover:bg-transparent border-slate-200 dark:border-zinc-800">
+                  <TableHead className="w-2/3 font-semibold text-slate-900 dark:text-zinc-50 py-4 px-6">Kegiatan Akademik</TableHead>
+                  <TableHead className="font-semibold text-slate-900 dark:text-zinc-50 py-4 px-6">Tanggal Pelaksanaan</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {KALENDER_PTA_2026.map((item, idx) => (
-                  <TableRow key={idx} className="hover:bg-slate-50/80 transition-colors border-slate-100">
-                    <TableCell className="font-medium text-slate-700 py-4 px-6 leading-relaxed">
+                  <TableRow key={idx} className="hover:bg-slate-50/80 dark:hover:bg-zinc-800/50 transition-colors border-slate-100 dark:border-zinc-800">
+                    <TableCell className="font-medium text-slate-700 dark:text-zinc-300 py-4 px-6 leading-relaxed">
                       {item.kegiatan}
                     </TableCell>
-                    <TableCell className="text-slate-600 py-4 px-6">
-                      <div className="inline-flex items-center gap-2 bg-slate-100/80 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 shadow-sm whitespace-nowrap">
-                        <i className="fa-regular fa-calendar-days text-blue-500"></i>
+                    <TableCell className="text-slate-600 dark:text-zinc-400 py-4 px-6">
+                      <div className="inline-flex items-center gap-2 bg-slate-100/80 dark:bg-zinc-800 px-3 py-1.5 rounded-lg text-sm font-medium border border-slate-200 dark:border-zinc-700 shadow-sm whitespace-nowrap">
+                        <i className="fa-regular fa-calendar-days text-blue-500 dark:text-blue-400"></i>
                         {item.tanggal}
                       </div>
                     </TableCell>
@@ -265,7 +265,7 @@ export default async function Home() {
           </AnimateIn>
           
           <AnimateIn delay={0.5} className="text-center">
-             <Link href="/gunadarma/baak/kalender" className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-2 hover:underline">
+             <Link href="/gunadarma/baak/kalender" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium inline-flex items-center gap-2 hover:underline">
                Lihat detail Kalender Akademik <i className="fa-solid fa-arrow-right text-xs"></i>
              </Link>
           </AnimateIn>
@@ -273,12 +273,12 @@ export default async function Home() {
       </div>
 
       {/* Live Feed Section */}
-      <div className="bg-slate-50 border-t py-20 overflow-hidden">
+      <div className="bg-slate-50 dark:bg-zinc-950 border-t dark:border-zinc-800 py-20 overflow-hidden">
         <div className="container mx-auto px-4 max-w-6xl">
           <AnimateIn delay={0.2} className="mb-10">
-            <span className="text-xs font-bold tracking-widest text-blue-600 uppercase mb-2 block">Informasi Terbaru</span>
-            <h2 className="font-serif text-4xl text-slate-900">Pusat Pengumuman</h2>
-            <p className="text-slate-500 mt-2 max-w-2xl">
+            <span className="text-xs font-bold tracking-widest text-blue-600 dark:text-blue-400 uppercase mb-2 block">Informasi Terbaru</span>
+            <h2 className="font-serif text-4xl text-slate-900 dark:text-zinc-50">Pusat Pengumuman</h2>
+            <p className="text-slate-500 dark:text-zinc-400 mt-2 max-w-2xl">
               Daftar pengumuman dan berita terbaru dari seluruh portal sistem informasi Universitas Gunadarma, termasuk BAAK, VM LePKom, dan StudentSite.
             </p>
           </AnimateIn>
