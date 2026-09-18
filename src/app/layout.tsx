@@ -70,6 +70,11 @@ const jsonLd = {
 
 import { ThemeProvider } from "@/components/ThemeProvider";
 
+import "../../public/fontawesome/fontawesome.css";
+import "../../public/fontawesome/solid.css";
+import "../../public/fontawesome/regular.css";
+import "../../public/fontawesome/brands.css";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -77,12 +82,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <head>
-        <link rel="stylesheet" precedence="default" href="/fontawesome/fontawesome.css" />
-        <link rel="stylesheet" precedence="default" href="/fontawesome/solid.css" />
-        <link rel="stylesheet" precedence="default" href="/fontawesome/regular.css" />
-        <link rel="stylesheet" precedence="default" href="/fontawesome/brands.css" />
-      </head>
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 min-h-screen flex flex-col`}>
         <script
           type="application/ld+json"

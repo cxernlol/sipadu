@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
 interface AnimateInProps {
@@ -11,51 +8,28 @@ interface AnimateInProps {
 
 export function AnimateIn({ children, delay = 0, className = "" }: AnimateInProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ 
-        duration: 0.5, 
-        delay: delay,
-        ease: [0.21, 0.47, 0.32, 0.98] // custom easing for smoothness
-      }}
-      className={className}
+    <div
+      className={`animate-fade-in-up ${className}`}
+      style={{ animationDelay: `${delay}s` }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 export function StaggerContainer({ children, className = "" }: { children: ReactNode, className?: string }) {
   return (
-    <motion.div
-      initial="hidden"
-      animate="show"
-      variants={{
-        hidden: {},
-        show: {
-          transition: {
-            staggerChildren: 0.1
-          }
-        }
-      }}
-      className={className}
-    >
+    <div className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 export function StaggerItem({ children, className = "" }: { children: ReactNode, className?: string }) {
+  // CSS stagger can be applied via child index if needed, but for simplicity we rely on native CSS
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 300, damping: 24 } }
-      }}
-      className={className}
-    >
+    <div className={`animate-fade-in-up ${className}`}>
       {children}
-    </motion.div>
+    </div>
   );
 }
