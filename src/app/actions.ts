@@ -19,7 +19,7 @@ export async function createComment(formData: FormData) {
     }
 
     // Insert the comment from the form into the Postgres database
-    await sql('INSERT INTO comments (comment) VALUES ($1)', [comment.trim()]);
+    await sql`INSERT INTO comments (comment) VALUES (${comment.trim()})`;
     
     revalidatePath('/');
     return { success: true };

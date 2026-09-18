@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { createComment } from '@/app/actions';
 
-export function CommentForm() {
+export default function CommentForm() {
   const [isPending, setIsPending] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 

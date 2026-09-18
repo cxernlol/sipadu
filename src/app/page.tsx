@@ -6,7 +6,7 @@ import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/AnimateIn
 import { RealTimeStats } from "@/components/UpdatesChart";
 import { getStats } from "@/lib/scraper";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { CommentForm } from "@/components/CommentForm";
+import CommentForm from "@/components/CommentForm";
 
 import gunadarmaLogo from "@/app/gunadarma/assets/gunadarma.jpg";
 import uiLogo from "@/app/ui/assets/UniversitasIndonesia.png";
