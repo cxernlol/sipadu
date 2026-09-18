@@ -76,7 +76,6 @@ import "../../public/fontawesome/fontawesome.css";
 import "../../public/fontawesome/solid.css";
 import "../../public/fontawesome/regular.css";
 import "../../public/fontawesome/brands.css";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -84,11 +83,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 min-h-screen flex flex-col`}>
+      <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+      </head>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 min-h-screen flex flex-col`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
