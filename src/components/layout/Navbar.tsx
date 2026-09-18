@@ -14,7 +14,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 // Let's import the assets statically to be safe, since they are in src/app.
 
 import gunadarmaLogo from "@/app/gunadarma/assets/gunadarma.jpg";
-import uiLogo from "@/app/ui/assets/UniversitasIndonesia.svg";
+import uiLogo from "@/app/ui/assets/UniversitasIndonesia.png";
 import ugmLogo from "@/app/ugm/assets/ugm.webp";
 import itbLogo from "@/app/itb/assets/itb.png";
 import ubLogo from "@/app/ub/assets/ub.webp";

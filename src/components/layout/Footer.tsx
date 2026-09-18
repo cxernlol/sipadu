@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import gunadarmaLogo from "@/app/gunadarma/assets/gunadarma.jpg";
-import uiLogo from "@/app/ui/assets/UniversitasIndonesia.svg";
+import uiLogo from "@/app/ui/assets/UniversitasIndonesia.png";
 import ugmLogo from "@/app/ugm/assets/ugm.webp";
 import itbLogo from "@/app/itb/assets/itb.png";
 import ubLogo from "@/app/ub/assets/ub.webp";
