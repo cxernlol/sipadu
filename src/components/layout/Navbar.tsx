@@ -5,14 +5,26 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
+import Image from "next/image";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-const UNI_DATA: Record<string, { name: string; color: string }> = {
-  gunadarma: { name: "Universitas Gunadarma", color: "text-blue-600" },
-  ui: { name: "Universitas Indonesia", color: "text-yellow-600" },
-  ugm: { name: "Universitas Gadjah Mada", color: "text-blue-800" },
-  itb: { name: "Institut Teknologi Bandung", color: "text-teal-700" },
-  ub: { name: "Universitas Brawijaya", color: "text-orange-600" },
+// Note: Use relative paths for static imports or standard absolute paths from / if in public.
+// Since these are in src/app, we need to import them dynamically or use standard img src if they were in public.
+// Wait, if they are in src/app/[uni]/assets, we can import them directly here, or we can use the next/image with imported static assets.
+// Let's import the assets statically to be safe, since they are in src/app.
+
+import gunadarmaLogo from "@/app/gunadarma/assets/gunadarma.jpg";
+import uiLogo from "@/app/ui/assets/UniversitasIndonesia.svg";
+import ugmLogo from "@/app/ugm/assets/ugm.webp";
+import itbLogo from "@/app/itb/assets/itb.png";
+import ubLogo from "@/app/ub/assets/ub.webp";
+
+const UNI_DATA: Record<string, { name: string; color: string; logo: any }> = {
+  gunadarma: { name: "Universitas Gunadarma", color: "text-blue-600", logo: gunadarmaLogo },
+  ui: { name: "Universitas Indonesia", color: "text-yellow-600", logo: uiLogo },
+  ugm: { name: "Universitas Gadjah Mada", color: "text-blue-800", logo: ugmLogo },
+  itb: { name: "Institut Teknologi Bandung", color: "text-teal-700", logo: itbLogo },
+  ub: { name: "Universitas Brawijaya", color: "text-orange-600", logo: ubLogo },
 };
 
 export function Navbar({ uni = "gunadarma" }: { uni?: string }) {
@@ -43,8 +55,8 @@ export function Navbar({ uni = "gunadarma" }: { uni?: string }) {
       <div className="container mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
         {/* Logo */}
         <Link href={`/${uni}`} className="flex items-center gap-2.5 group">
-          <div className={`h-7 w-7 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white text-[10px] shadow-md group-hover:scale-105 transition-transform`}>
-            <i className="fa-solid fa-graduation-cap" />
+          <div className="h-7 w-7 rounded-lg overflow-hidden flex items-center justify-center bg-white shadow-sm border border-slate-200 dark:border-slate-800 group-hover:scale-105 transition-transform relative">
+            <Image src={currentUni.logo} alt={currentUni.name} fill className="object-contain p-1" />
           </div>
           <span className="text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-50 hidden sm:inline">
             SiPadu<span className={currentUni.color}> · {uni.charAt(0).toUpperCase() + uni.slice(1)}</span>

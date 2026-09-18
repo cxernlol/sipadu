@@ -1,5 +1,13 @@
 import Link from "next/link";
 
+import Image from "next/image";
+
+import gunadarmaLogo from "@/app/gunadarma/assets/gunadarma.jpg";
+import uiLogo from "@/app/ui/assets/UniversitasIndonesia.svg";
+import ugmLogo from "@/app/ugm/assets/ugm.webp";
+import itbLogo from "@/app/itb/assets/itb.png";
+import ubLogo from "@/app/ub/assets/ub.webp";
+
 interface UniFooterConfig {
   name: string;
   shortName: string;
@@ -8,6 +16,7 @@ interface UniFooterConfig {
   dataSources: string;
   externalLinks: { label: string; href: string; icon: string }[];
   portalLinks: { label: string; href: string }[];
+  logo: any;
 }
 
 const UNI_FOOTER_CONFIG: Record<string, UniFooterConfig> = {
@@ -28,6 +37,7 @@ const UNI_FOOTER_CONFIG: Record<string, UniFooterConfig> = {
       { label: "Materi LePKom", href: "/gunadarma/lepkom/materi" },
       { label: "Kalender Akademik", href: "/gunadarma/baak/kalender" },
     ],
+    logo: gunadarmaLogo,
   },
   ui: {
     name: "Universitas Indonesia",
@@ -39,6 +49,7 @@ const UNI_FOOTER_CONFIG: Record<string, UniFooterConfig> = {
       { label: "Portal Akademik UI", href: "https://academic.ui.ac.id", icon: "fa-solid fa-building" },
     ],
     portalLinks: [],
+    logo: uiLogo,
   },
   ugm: {
     name: "Universitas Gadjah Mada",
@@ -50,6 +61,7 @@ const UNI_FOOTER_CONFIG: Record<string, UniFooterConfig> = {
       { label: "Portal Akademik UGM", href: "https://akademik.ugm.ac.id", icon: "fa-solid fa-building" },
     ],
     portalLinks: [],
+    logo: ugmLogo,
   },
   itb: {
     name: "Institut Teknologi Bandung",
@@ -61,6 +73,7 @@ const UNI_FOOTER_CONFIG: Record<string, UniFooterConfig> = {
       { label: "Portal Akademik ITB", href: "https://akademik.itb.ac.id", icon: "fa-solid fa-building" },
     ],
     portalLinks: [],
+    logo: itbLogo,
   },
   ub: {
     name: "Universitas Brawijaya",
@@ -72,6 +85,7 @@ const UNI_FOOTER_CONFIG: Record<string, UniFooterConfig> = {
       { label: "Portal Akademik UB", href: "https://akademik.ub.ac.id", icon: "fa-solid fa-building" },
     ],
     portalLinks: [],
+    logo: ubLogo,
   },
 };
 
@@ -84,9 +98,9 @@ export function Footer({ uni = "gunadarma" }: { uni?: string }) {
         <div className="grid md:grid-cols-4 gap-10 mb-10">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link href={`/${uni}`} className="flex items-center gap-2.5 mb-4">
-              <div className={`h-8 w-8 bg-gradient-to-br ${config.accentBg} rounded-lg flex items-center justify-center text-white text-xs shadow-lg`}>
-                <i className="fa-solid fa-graduation-cap" />
+            <Link href={`/${uni}`} className="flex items-center gap-2.5 mb-4 group">
+              <div className="h-8 w-8 rounded-lg overflow-hidden flex items-center justify-center bg-white shadow-sm border border-slate-200 dark:border-slate-800 group-hover:scale-105 transition-transform relative">
+                <Image src={config.logo} alt={config.name} fill className="object-contain p-1" />
               </div>
               <span className="text-base font-semibold tracking-tight text-slate-900">
                 SiPadu<span className={config.accent}> · {config.shortName}</span>
