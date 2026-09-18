@@ -9,11 +9,16 @@ Welcome, Agent! You are working on **SiPadu** (Sistem Informasi Terpadu), a univ
 4. **WAF / CAPTCHA Fallback**: The app relies on live scraping (via Cheerio). However, university servers (like VM LePKom) often block scraping. All data-fetching API routes MUST implement a silent fallback to `src/data/db.json` on timeout or HTTP error. DO NOT expose 500 errors to the frontend.
 
 ## 🏗️ Architecture & Stack
-- **Framework**: Next.js 16 (App Router)
+- **Frontend Framework**: Next.js 16 (App Router)
 - **Styling**: Tailwind CSS v4 + Shadcn UI
-- **Language**: TypeScript (Must ensure `npm run build` succeeds without `any[]` implicit type errors)
-- **Data Source**: Live HTML Scraping via Cheerio + local JSON fallback
+- **Language**: TypeScript (Frontend) & Rust (Backend Scraper)
+- **Data Source**: Live HTML Scraping via Rust `scraper_rs` + local `src/data/db.json` fallback
 - **Hosting**: Vercel (Edge network, SSL, and DDoS handled by platform)
+
+## 🦀 Rust Scraper (scraper_rs)
+The data scraper is written in Rust (`scraper_rs` directory) using `tokio` (concurrency) and `headless_chrome` to bypass Cloudflare WAF. 
+- **DO NOT** rewrite the scraper in Node.js/Puppeteer; it was intentionally migrated to Rust for performance.
+- To test the scraper, you must instruct the user to install Rust, then use `npm run scrape` (which proxies to `cargo run --release`).
 
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know

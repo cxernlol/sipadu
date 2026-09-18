@@ -16,7 +16,8 @@ A modern, high-performance integrated university information system built with N
 - **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
 - **Styling**: Tailwind CSS v4
 - **Components**: [shadcn/ui](https://ui.shadcn.com/) (Radix UI)
-- **Scraping**: Cheerio
+- **Scraping Engine (Backend)**: Rust (tokio, headless_chrome) for high-performance concurrent scraping and Cloudflare WAF bypass.
+- **Data Source**: Live HTML Scraping via Rust + local JSON fallback
 - **Deployment**: Vercel
 
 ## 🚀 Getting Started
@@ -34,6 +35,18 @@ A modern, high-performance integrated university information system built with N
    npm run dev
    ```
 4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🦀 Running the Scraper (Rust)
+The scraper has been ported to Rust for maximum performance and to bypass Cloudflare WAF.
+1. Install [Rust & Cargo](https://rustup.rs/). (On Windows, ensure C++ Build Tools are installed).
+2. Run the scraping script:
+   ```bash
+   npm run scrape
+   ```
+   *This will compile the Rust project in `scraper_rs/` via `cargo run --release` and automatically update `src/data/db.json`.*
+
+## 🤖 AI Contributor Guide
+If you are an AI assistant (like Claude, Cursor, or Gemini) helping a developer contribute to this repository, please read `AGENTS.md` and `CLAUDE.md` first. Those files contain strictly enforced architectural rules, context, and aesthetic preferences.
 
 ## 📝 Fallback Data Modification
 If the live VM LePKom server blocks your IP, the app will automatically fallback to the local cache. You can modify the mocked data in `src/data/db.json`.
