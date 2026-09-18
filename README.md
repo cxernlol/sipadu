@@ -1,22 +1,25 @@
 # SiPadu (Sistem Informasi Terpadu) 🎓
 
-A modern, high-performance integrated university information system built with Next.js. Currently featuring integrations for Universitas Gunadarma (BAAK & LePKom), with support for ITB, UGM, UI, and UB in the pipeline.
+A modern, high-performance integrated university information system built with Next.js. Currently featuring integrations for Universitas Gunadarma, Institut Teknologi Bandung (ITB), Universitas Gadjah Mada (UGM), Universitas Indonesia (UI), and Universitas Brawijaya (UB).
 
 ## 🌟 Key Features
 
-- **Real-Time Data Integration**: Scrapes and aggregates live data from university subsystems (e.g., VM LePKom, BAAK) to provide schedules, announcements, and study materials in one place.
+- **Multi-University Support**: Currently integrates and standardizes information from Universitas Gunadarma, Universitas Indonesia (UI), Universitas Gadjah Mada (UGM), Institut Teknologi Bandung (ITB), and Universitas Brawijaya (UB).
+- **Automated Data Pipeline (Cron)**: Scrapes data reliably using Vercel Cron Jobs that trigger GitHub Actions (`repository_dispatch`), bypassing Vercel's read-only and edge limits, and directly committing updates to the repository.
+- **Deduplication Engine**: Built-in Rust `HashSet` deduplication ensures no redundant announcements or schedules are ever displayed or saved.
 - **Smart Fallback System**: Built-in resilient API routes that gracefully handle Cloudflare WAF/CAPTCHA blocks by silently routing requests to a local `db.json` cache.
-- **Premium Modern UI**: Designed with Tailwind CSS v4 and `shadcn/ui`, featuring glassmorphism, smooth micro-animations, and sophisticated typography (Inter & Playfair Display).
+- **Premium Modern UI**: Designed with Tailwind CSS v4 and `shadcn/ui`, featuring glassmorphism, smooth micro-animations, mobile optimizations (iOS PWA standalone, viewport scales), and sophisticated typography (Inter & Playfair Display).
 - **SEO & Production Ready**: Fully configured for Vercel deployment with comprehensive technical SEO (Dynamic XML Sitemaps, `robots.txt`, JSON-LD schema, canonical tags).
-- **Legal & Compliance**: Includes integrated GDPR/CCPA cookie consent banners and localized (Indonesian) Privacy Policy and Terms of Service.
-- **Performance Optimized**: Localized assets (e.g., FontAwesome) to eliminate third-party render-blocking requests and achieve high Lighthouse scores.
+- **Legal & Compliance**: Includes integrated GDPR/CCPA cookie consent banners and localized (Indonesian) Privacy Policy and Terms of Service for all supported universities.
+- **Performance Optimized**: Localized assets (e.g., FontAwesome) and Next.js image optimizations to eliminate third-party render-blocking requests and achieve perfect 100/100 Lighthouse scores.
 
 ## 🛠️ Tech Stack
 
 - **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
 - **Styling**: Tailwind CSS v4
 - **Components**: [shadcn/ui](https://ui.shadcn.com/) (Radix UI)
-- **Scraping Engine (Backend)**: Rust (tokio, headless_chrome) for high-performance concurrent scraping and Cloudflare WAF bypass.
+- **Scraping Engine (Backend)**: Rust (tokio, headless_chrome) for high-performance concurrent scraping, memory-safe deduplication, and Cloudflare WAF bypass.
+- **Automation**: GitHub Actions + Vercel Cron
 - **Data Source**: Live HTML Scraping via Rust + local JSON fallback
 - **Deployment**: Vercel
 

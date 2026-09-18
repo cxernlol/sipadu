@@ -12,13 +12,15 @@ Welcome, Agent! You are working on **SiPadu** (Sistem Informasi Terpadu), a univ
 - **Frontend Framework**: Next.js 16 (App Router)
 - **Styling**: Tailwind CSS v4 + Shadcn UI
 - **Language**: TypeScript (Frontend) & Rust (Backend Scraper)
+- **Multi-University Routing**: The app supports 5 universities via dedicated route segments: `/gunadarma`, `/ui`, `/ugm`, `/itb`, `/ub`.
 - **Data Source**: Live HTML Scraping via Rust `scraper_rs` + local `src/data/db.json` fallback
+- **Automation (Cron)**: Vercel Cron hits `/api/cron/scrape`, which dispatches a GitHub Action workflow to run the Rust scraper natively (bypassing Vercel's Edge restrictions). 
 - **Hosting**: Vercel (Edge network, SSL, and DDoS handled by platform)
 
 ## 🦀 Rust Scraper (scraper_rs)
-The data scraper is written in Rust (`scraper_rs` directory) using `tokio` (concurrency) and `headless_chrome` to bypass Cloudflare WAF. 
+The data scraper is written in Rust (`scraper_rs` directory) using `tokio` (concurrency), `headless_chrome` to bypass Cloudflare WAF, and `HashSet` for rigorous deduplication (so no redundant articles are ever saved).
 - **DO NOT** rewrite the scraper in Node.js/Puppeteer; it was intentionally migrated to Rust for performance.
-- To test the scraper, you must instruct the user to install Rust, then use `npm run scrape` (which proxies to `cargo run --release`).
+- To test the scraper locally, you must instruct the user to install Rust, then use `npm run scrape` (which proxies to `cargo run --release`).
 
 <!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
