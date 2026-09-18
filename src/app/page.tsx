@@ -171,34 +171,34 @@ export default async function LandingPage() {
                   <Card className={`relative overflow-hidden h-full border-zinc-200/80 dark:border-zinc-800 bg-white/70 dark:bg-zinc-900/50 backdrop-blur-sm transition-all duration-500 ${
                     uni.status === "Live"
                       ? "hover:bg-white dark:hover:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-1 hover:shadow-xl hover:shadow-zinc-200/50 dark:hover:shadow-black/50 group"
-                      : "opacity-50"
+                      : "opacity-75"
                   }`}>
                     {/* Gradient accent line */}
-                    <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${uni.accent} ${uni.status === "Live" ? "opacity-100" : "opacity-30"}`} />
+                    <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${uni.accent} ${uni.status === "Live" ? "opacity-100" : "opacity-40"}`} />
                     
                     <CardContent className="p-7">
                       <div className="flex items-start justify-between mb-6">
                         <div className={`h-14 w-14 rounded-2xl ${uni.iconBg} flex items-center justify-center ring-1 ${uni.ringColor} p-2.5 transition-transform duration-300 ${uni.status === "Live" ? "group-hover:scale-110" : ""}`}>
-                          <img src={uni.logo} alt={uni.name} className={`w-full h-full object-contain ${uni.status !== "Live" ? "grayscale" : ""}`} />
+                          <img src={uni.logo} alt={uni.name} className={`w-full h-full object-contain ${uni.status !== "Live" ? "grayscale opacity-80" : ""}`} />
                         </div>
                         {uni.status === "Live" ? (
-                          <Badge className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-semibold tracking-wide">
+                          <Badge className="bg-emerald-50 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 text-[10px] font-semibold tracking-wide">
                             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse" /> AKTIF
                           </Badge>
                         ) : (
-                          <Badge className="bg-slate-50 text-slate-400 border border-slate-200 text-[10px] font-semibold tracking-wide">
+                          <Badge className="bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 border border-slate-300 dark:border-slate-700 text-[10px] font-semibold tracking-wide">
                             SEGERA
                           </Badge>
                         )}
                       </div>
 
-                      <h3 className="font-bold text-lg text-zinc-900 dark:text-zinc-50 mb-2 tracking-tight">{uni.name}</h3>
-                      <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-5">{uni.description}</p>
+                      <h3 className={`font-bold text-lg mb-2 tracking-tight ${uni.status === "Live" ? "text-zinc-900 dark:text-zinc-50" : "text-zinc-700 dark:text-zinc-300"}`}>{uni.name}</h3>
+                      <p className={`text-sm leading-relaxed mb-5 ${uni.status === "Live" ? "text-zinc-600 dark:text-zinc-400" : "text-zinc-600 dark:text-zinc-400"}`}>{uni.description}</p>
 
                       <div className={`text-xs font-mono px-3 py-2 rounded-lg inline-flex items-center gap-2 transition-all duration-300 ${
                         uni.status === "Live"
-                          ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 group-hover:text-blue-600 group-hover:bg-blue-50 dark:group-hover:bg-blue-900/30"
-                          : "bg-zinc-50/50 dark:bg-zinc-900/30 text-zinc-400 dark:text-zinc-600"
+                          ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 group-hover:text-blue-700 group-hover:bg-blue-50 dark:group-hover:text-blue-300 dark:group-hover:bg-blue-900/50"
+                          : "bg-zinc-100 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-400"
                       }`}>
                         <i className="fa-solid fa-globe text-[10px]" />
                         {uni.id}.sipadu.info
@@ -211,13 +211,13 @@ export default async function LandingPage() {
 
             {/* "More coming" card */}
             <StaggerItem>
-              <Card className="relative overflow-hidden h-full border-dashed border-zinc-200 dark:border-zinc-800 bg-transparent hover:bg-white/50 dark:hover:bg-zinc-900/50 transition-all duration-500 flex items-center justify-center min-h-[240px]">
+              <Card className="relative overflow-hidden h-full border-dashed border-zinc-300 dark:border-zinc-700 bg-transparent hover:bg-white/50 dark:hover:bg-zinc-900/50 transition-all duration-500 flex items-center justify-center min-h-[240px]">
                 <CardContent className="p-7 text-center">
-                  <div className="h-14 w-14 rounded-2xl bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center ring-1 ring-zinc-200 dark:ring-zinc-700 mx-auto mb-4">
-                    <i className="fa-solid fa-plus text-zinc-300 dark:text-zinc-600 text-xl" />
+                  <div className="h-14 w-14 rounded-2xl bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center ring-1 ring-zinc-300 dark:ring-zinc-600 mx-auto mb-4">
+                    <i className="fa-solid fa-plus text-zinc-500 dark:text-zinc-400 text-xl" />
                   </div>
-                  <h3 className="font-semibold text-zinc-400 dark:text-zinc-500 mb-1">Segera hadir</h3>
-                  <p className="text-xs text-zinc-300 dark:text-zinc-600">Universitas lainnya sedang disiapkan</p>
+                  <h3 className="font-semibold text-zinc-600 dark:text-zinc-300 mb-1">Segera hadir</h3>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400">Universitas lainnya sedang disiapkan</p>
                 </CardContent>
               </Card>
             </StaggerItem>
@@ -229,11 +229,11 @@ export default async function LandingPage() {
       <section id="fitur" className="py-24 md:py-32 border-t border-zinc-200/60 dark:border-zinc-800/60">
         <div className="container mx-auto px-6 max-w-6xl">
           <AnimateIn className="text-center mb-16">
-            <span className="text-xs font-bold tracking-[0.2em] text-indigo-600 uppercase mb-4 block">Mengapa SiPadu</span>
+            <span className="text-xs font-bold tracking-[0.2em] text-indigo-700 dark:text-indigo-400 uppercase mb-4 block">Mengapa SiPadu</span>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4">
               Dibangun untuk <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-600">skala besar</span>
             </h2>
-            <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto text-lg font-light">
+            <p className="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto text-lg font-light">
               Infrastruktur modern yang siap menangani ratusan kampus secara bersamaan.
             </p>
           </AnimateIn>
@@ -246,7 +246,7 @@ export default async function LandingPage() {
                     <i className={`${feature.icon} ${feature.color} text-lg`} />
                   </div>
                   <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 text-lg mb-2">{feature.title}</h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">{feature.description}</p>
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">{feature.description}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -259,19 +259,19 @@ export default async function LandingPage() {
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <AnimateIn>
-              <span className="text-xs font-bold tracking-[0.2em] text-emerald-600 uppercase mb-4 block">API Publik</span>
+              <span className="text-xs font-bold tracking-[0.2em] text-emerald-700 dark:text-emerald-400 uppercase mb-4 block">API Publik</span>
               <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-6">
                 Data kampus,<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-cyan-600">satu endpoint.</span>
               </h2>
-              <p className="text-zinc-500 dark:text-zinc-400 text-lg leading-relaxed mb-8 font-light">
+              <p className="text-zinc-600 dark:text-zinc-400 text-lg leading-relaxed mb-8 font-light">
                 Akses jadwal, pengumuman, dan materi dari seluruh universitas yang terhubung melalui REST API yang gratis dan terbuka. Dokumentasi lengkap, response time &lt;200ms.
               </p>
               <div className="flex flex-wrap gap-3">
-                <span className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-medium border border-emerald-200">REST API</span>
-                <span className="px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 text-xs font-medium border border-blue-200">JSON Response</span>
-                <span className="px-3 py-1.5 rounded-full bg-purple-50 text-purple-700 text-xs font-medium border border-purple-200">Rate Limited</span>
-                <span className="px-3 py-1.5 rounded-full bg-amber-50 text-amber-700 text-xs font-medium border border-amber-200">CORS Enabled</span>
+                <span className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold">REST API</span>
+                <span className="px-3 py-1.5 rounded-full bg-blue-50 text-blue-800 border border-blue-200 text-xs font-semibold">JSON Response</span>
+                <span className="px-3 py-1.5 rounded-full bg-purple-50 text-purple-800 border border-purple-200 text-xs font-semibold">Rate Limited</span>
+                <span className="px-3 py-1.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-semibold">CORS Enabled</span>
               </div>
             </AnimateIn>
 
@@ -282,7 +282,7 @@ export default async function LandingPage() {
                   <span className="h-3 w-3 rounded-full bg-red-500/80" />
                   <span className="h-3 w-3 rounded-full bg-amber-500/80" />
                   <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
-                  <span className="ml-4 text-xs text-zinc-500 font-mono">api-example.ts</span>
+                  <span className="ml-4 text-xs text-zinc-400 font-mono">api-example.ts</span>
                 </div>
                 {/* Code content */}
                 <pre className="p-6 text-sm font-mono leading-relaxed overflow-x-auto text-zinc-300">
@@ -365,28 +365,28 @@ export default async function LandingPage() {
 
             {/* Links */}
             <div>
-              <h4 className="text-xs font-bold tracking-[0.15em] text-zinc-400 dark:text-zinc-500 uppercase mb-4">Platform</h4>
+              <h3 className="text-xs font-bold tracking-[0.15em] text-zinc-600 dark:text-zinc-400 uppercase mb-4">Platform</h3>
               <ul className="space-y-2.5 text-sm">
-                <li><Link href="/gunadarma" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Gunadarma</Link></li>
-                <li><Link href="/ui" className="text-zinc-400 dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">UI (Segera Hadir)</Link></li>
-                <li><Link href="/ugm" className="text-zinc-400 dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">UGM (Segera Hadir)</Link></li>
-                <li><Link href="/itb" className="text-zinc-400 dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 transition-colors">ITB (Segera Hadir)</Link></li>
+                <li><Link href="/gunadarma" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Gunadarma</Link></li>
+                <li><Link href="/ui" className="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors">UI (Segera Hadir)</Link></li>
+                <li><Link href="/ugm" className="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors">UGM (Segera Hadir)</Link></li>
+                <li><Link href="/itb" className="text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors">ITB (Segera Hadir)</Link></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-xs font-bold tracking-[0.15em] text-zinc-400 dark:text-zinc-500 uppercase mb-4">Legal</h4>
+              <h3 className="text-xs font-bold tracking-[0.15em] text-zinc-600 dark:text-zinc-400 uppercase mb-4">Legal</h3>
               <ul className="space-y-2.5 text-sm">
-                <li><Link href="/privacy" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Kebijakan Privasi</Link></li>
-                <li><Link href="/terms" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Syarat & Ketentuan</Link></li>
-                <li><a href="https://github.com/cxernlol/sipadu" className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><Link href="/privacy" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Kebijakan Privasi</Link></li>
+                <li><Link href="/terms" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">Syarat & Ketentuan</Link></li>
+                <li><a href="https://github.com/cxernlol/sipadu" className="text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a></li>
               </ul>
             </div>
           </div>
 
-          <div className="pt-8 border-t border-zinc-100 dark:border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-xs text-zinc-400 dark:text-zinc-500">&copy; 2026 SiPadu.info &mdash; Agregator universitas sumber terbuka.</p>
-            <p className="text-xs text-zinc-400 dark:text-zinc-500">Dihosting di <i className="fa-solid fa-triangle text-zinc-500 dark:text-zinc-400 mx-1" /> Vercel</p>
+          <div className="pt-8 border-t border-zinc-200 dark:border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">&copy; 2026 SiPadu.info &mdash; Agregator universitas sumber terbuka.</p>
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">Dihosting di <i className="fa-solid fa-triangle mx-1" /> Vercel</p>
           </div>
         </div>
       </footer>

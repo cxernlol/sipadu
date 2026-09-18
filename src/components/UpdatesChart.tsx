@@ -65,24 +65,24 @@ export async function RealTimeStats() {
                 <i className={`${item.icon} ${item.color}`} />
               </div>
               <div className="text-3xl font-bold text-slate-900 tracking-tight">{item.value}</div>
-              <div className="text-sm font-semibold text-slate-600 mt-1">{item.label}</div>
-              <div className="text-[11px] text-slate-400 mt-0.5">{item.description}</div>
+              <div className="text-sm font-semibold text-slate-700 mt-1">{item.label}</div>
+              <div className="text-[11px] text-slate-500 mt-0.5">{item.description}</div>
             </div>
           ))}
         </div>
 
         {/* Status bar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-1">
-          <div className="flex items-center gap-2 text-sm text-slate-500">
+          <div className="flex items-center gap-2 text-sm text-slate-600">
             <span className="relative flex h-2.5 w-2.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
             </span>
-            <span className="font-medium text-emerald-600">Sistem aktif</span>
-            <span className="text-slate-300">·</span>
+            <span className="font-medium text-emerald-700">Sistem aktif</span>
+            <span className="text-slate-400">·</span>
             Fallback otomatis tersedia
           </div>
-          <div className="text-xs text-slate-400 flex items-center gap-1.5">
+          <div className="text-xs text-slate-500 flex items-center gap-1.5">
             <i className="fa-regular fa-clock" />
             Terakhir diperbarui: {lastUpdatedStr}
           </div>
