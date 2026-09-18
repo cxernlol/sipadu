@@ -58,11 +58,11 @@ export default async function LandingPage() {
     <div className="min-h-screen bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-50 relative overflow-hidden">
       {/* ===== AMBIENT BACKGROUND ===== */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-200/30 rounded-full blur-[128px] animate-pulse" />
-        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-purple-200/20 rounded-full blur-[128px] animate-pulse [animation-delay:2s]" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-indigo-200/15 rounded-full blur-[128px]" />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-blue-200/30 dark:bg-blue-900/20 rounded-full blur-[128px] animate-pulse" />
+        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-purple-200/20 dark:bg-purple-900/20 rounded-full blur-[128px] animate-pulse [animation-delay:2s]" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-indigo-200/15 dark:bg-indigo-900/15 rounded-full blur-[128px]" />
         {/* Grid overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
       </div>
 
       {/* ===== NAVBAR ===== */}
@@ -72,7 +72,7 @@ export default async function LandingPage() {
             <div className="h-9 w-9 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center text-white text-sm shadow-lg shadow-blue-500/25 group-hover:shadow-blue-500/40 group-hover:scale-105 transition-all duration-300">
               <i className="fa-solid fa-graduation-cap" />
             </div>
-            <span className="text-lg font-semibold tracking-tight text-slate-900">
+            <span className="text-lg font-semibold tracking-tight text-slate-900 dark:text-zinc-50">
               SiPadu<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-500">.info</span>
             </span>
           </Link>
@@ -340,6 +340,25 @@ export default async function LandingPage() {
                 </div>
               </div>
             </div>
+          </AnimateIn>
+        </div>
+      </section>
+
+      {/* ===== COMMENTS SECTION ===== */}
+      <section className="py-24 border-t border-zinc-200/60 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-950/50">
+        <div className="container mx-auto px-6 max-w-4xl">
+          <AnimateIn className="text-center mb-12">
+            <span className="text-xs font-bold tracking-[0.2em] text-blue-600 uppercase mb-4 block">Saran & Masukan</span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4">
+              Bantu Kami Berkembang
+            </h2>
+            <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto font-light">
+              Punya ide fitur baru atau menemukan bug? Tinggalkan pesan Anda di bawah ini.
+            </p>
+          </AnimateIn>
+
+          <AnimateIn delay={0.2}>
+            <CommentForm />
           </AnimateIn>
         </div>
       </section>
