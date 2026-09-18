@@ -100,7 +100,7 @@ export function Footer({ uni = "gunadarma" }: { uni?: string }) {
           <div className="md:col-span-2">
             <Link href={`/${uni}`} className="flex items-center gap-2.5 mb-4 group">
               <div className="h-8 w-8 rounded-lg overflow-hidden flex items-center justify-center bg-white shadow-sm border border-slate-200 dark:border-slate-800 group-hover:scale-105 transition-transform relative">
-                <Image src={config.logo} alt={config.name} fill className="object-contain p-1" />
+                <Image src={config.logo} alt={config.name} fill sizes="36px" className="object-contain p-1" />
               </div>
               <span className="text-base font-semibold tracking-tight text-slate-900">
                 SiPadu<span className={config.accent}> · {config.shortName}</span>

@@ -56,7 +56,7 @@ export function Navbar({ uni = "gunadarma" }: { uni?: string }) {
         {/* Logo */}
         <Link href={`/${uni}`} className="flex items-center gap-2.5 group">
           <div className="h-7 w-7 rounded-lg overflow-hidden flex items-center justify-center bg-white shadow-sm border border-slate-200 dark:border-slate-800 group-hover:scale-105 transition-transform relative">
-            <Image src={currentUni.logo} alt={currentUni.name} fill className="object-contain p-1" />
+            <Image src={currentUni.logo} alt={currentUni.name} fill sizes="32px" className="object-contain p-1" />
           </div>
           <span className="text-sm font-semibold tracking-tight text-slate-900 dark:text-slate-50 hidden sm:inline">
             SiPadu<span className={currentUni.color}> · {uni.charAt(0).toUpperCase() + uni.slice(1)}</span>
