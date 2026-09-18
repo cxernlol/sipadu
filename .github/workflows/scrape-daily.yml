@@ -1,0 +1,32 @@
+name: Scraper - Daily (LePKom)
+
+on:
+  schedule:
+    # Run at 00:00 everyday
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  scrape-lepkom:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Missing Dependencies
+        run: sudo apt-get update && sudo apt-get install -y libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2
+
+      - name: Run Scraper (LePKom)
+        working-directory: ./scraper_rs
+        run: cargo run --release -- lepkom
+        
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/db.json
+          git commit -m "chore(data): auto-update lepkom data [skip ci]" || echo "No changes to commit"
+          git push
