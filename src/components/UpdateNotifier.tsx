@@ -21,7 +21,7 @@ export function UpdateNotifier({ latestId, latestTitle }: UpdateNotifierProps) {
           description: latestTitle,
           action: {
             label: "Lihat",
-            onClick: () => window.location.href = "/pengumuman",
+            onClick: () => window.location.href = "/gunadarma/baak/pengumuman",
           },
         });
         

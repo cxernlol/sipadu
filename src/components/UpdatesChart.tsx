@@ -1,145 +1,93 @@
-"use client";
+import { getStats } from "@/lib/scraper";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { TrendingUp } from "lucide-react";
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
+export async function RealTimeStats() {
+  const stats = await getStats();
 
-const chartData = [
-  { month: "Jan", gunadarma: 120, ui: 10, ugm: 5, itb: 0, ub: 0 },
-  { month: "Feb", gunadarma: 180, ui: 20, ugm: 10, itb: 0, ub: 0 },
-  { month: "Mar", gunadarma: 230, ui: 45, ugm: 25, itb: 15, ub: 5 },
-  { month: "Apr", gunadarma: 310, ui: 85, ugm: 40, itb: 25, ub: 15 },
-  { month: "May", gunadarma: 480, ui: 150, ugm: 95, itb: 50, ub: 30 },
-  { month: "Jun", gunadarma: 620, ui: 240, ugm: 180, itb: 110, ub: 80 },
-];
+  const lastUpdatedStr = stats.lastUpdated
+    ? new Date(stats.lastUpdated).toLocaleString("id-ID", {
+        dateStyle: "long",
+        timeStyle: "short",
+      })
+    : "Tidak tersedia";
 
-const chartConfig = {
-  gunadarma: {
-    label: "Gunadarma",
-    color: "hsl(270, 70%, 60%)",
-  },
-  ui: {
-    label: "UI",
-    color: "hsl(45, 90%, 55%)",
-  },
-  ugm: {
-    label: "UGM",
-    color: "hsl(220, 80%, 60%)",
-  },
-  itb: {
-    label: "ITB",
-    color: "hsl(175, 70%, 50%)",
-  },
-  ub: {
-    label: "UB",
-    color: "hsl(25, 90%, 60%)",
-  },
-} satisfies ChartConfig;
+  const items = [
+    {
+      label: "Pengumuman",
+      value: stats.totalAnnouncements,
+      icon: "fa-solid fa-bullhorn",
+      color: "text-blue-600",
+      bg: "bg-blue-50",
+      description: "Dari BAAK, LePKom & StudentSite",
+    },
+    {
+      label: "Data Jadwal",
+      value: stats.totalJadwal,
+      icon: "fa-solid fa-calendar-days",
+      color: "text-purple-600",
+      bg: "bg-purple-50",
+      description: "Entri jadwal kursus praktikan",
+    },
+    {
+      label: "Materi Kursus",
+      value: stats.totalMateri,
+      icon: "fa-solid fa-book-open",
+      color: "text-emerald-600",
+      bg: "bg-emerald-50",
+      description: "Topik dari seluruh tingkat",
+    },
+    {
+      label: "Kalender",
+      value: stats.totalKalender,
+      icon: "fa-solid fa-calendar-check",
+      color: "text-amber-600",
+      bg: "bg-amber-50",
+      description: "Kegiatan semester terjadwal",
+    },
+  ];
 
-export function UpdatesChart() {
   return (
     <Card className="border-0 shadow-none bg-transparent">
-      <CardHeader>
-        <CardTitle className="text-xl font-bold text-slate-900 dark:text-white">Total Pembaruan Terkirim</CardTitle>
-        <CardDescription className="text-slate-500 dark:text-white/30">
-          Pelacakan pengumuman, jadwal, dan materi yang terkirim — Jan hingga Jun 2026
-        </CardDescription>
+      <CardHeader className="pb-2">
+        <CardTitle className="text-xl font-bold text-slate-900">Data Terintegrasi — Real-Time</CardTitle>
+        <p className="text-sm text-slate-400">
+          Total data yang tersinkronisasi dari {stats.sources} sumber universitas
+        </p>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig} className="h-[300px] w-full">
-          <LineChart
-            accessibilityLayer
-            data={chartData}
-            margin={{
-              left: 12,
-              right: 12,
-              top: 12,
-              bottom: 12,
-            }}
-          >
-            <CartesianGrid vertical={false} strokeDasharray="3 3" className="stroke-slate-200 dark:stroke-white/[0.06]" />
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
-              className="text-slate-500 dark:text-white/30 text-xs"
-            />
-            <YAxis
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              className="text-slate-500 dark:text-white/30 text-xs"
-            />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            <Line
-              dataKey="gunadarma"
-              type="monotone"
-              stroke="var(--color-gunadarma)"
-              strokeWidth={3}
-              dot={false}
-            />
-            <Line
-              dataKey="ui"
-              type="monotone"
-              stroke="var(--color-ui)"
-              strokeWidth={2}
-              strokeDasharray="5 5"
-              dot={false}
-            />
-            <Line
-              dataKey="ugm"
-              type="monotone"
-              stroke="var(--color-ugm)"
-              strokeWidth={2}
-              strokeDasharray="5 5"
-              dot={false}
-            />
-            <Line
-              dataKey="itb"
-              type="monotone"
-              stroke="var(--color-itb)"
-              strokeWidth={2}
-              strokeDasharray="5 5"
-              dot={false}
-            />
-            <Line
-              dataKey="ub"
-              type="monotone"
-              stroke="var(--color-ub)"
-              strokeWidth={2}
-              strokeDasharray="5 5"
-              dot={false}
-            />
-          </LineChart>
-        </ChartContainer>
-      </CardContent>
-      <CardFooter>
-        <div className="flex w-full items-start gap-2 text-sm">
-          <div className="grid gap-2">
-            <div className="flex items-center gap-2 font-medium leading-none text-slate-700 dark:text-white/60">
-              Pertumbuhan data naik 52% bulan ini <TrendingUp className="h-4 w-4 text-emerald-500" />
+      <CardContent className="pt-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          {items.map((item) => (
+            <div
+              key={item.label}
+              className="relative overflow-hidden rounded-xl border border-slate-200/80 bg-white p-5 hover:shadow-md transition-shadow group"
+            >
+              <div className={`h-10 w-10 rounded-xl ${item.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                <i className={`${item.icon} ${item.color}`} />
+              </div>
+              <div className="text-3xl font-bold text-slate-900 tracking-tight">{item.value}</div>
+              <div className="text-sm font-semibold text-slate-600 mt-1">{item.label}</div>
+              <div className="text-[11px] text-slate-400 mt-0.5">{item.description}</div>
             </div>
-            <div className="flex items-center gap-2 leading-none text-slate-500 dark:text-white/25">
-              Sistem telah mendeliver lebih dari 1.000 update real-time ke ribuan mahasiswa.
-            </div>
+          ))}
+        </div>
+
+        {/* Status bar */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 px-1">
+          <div className="flex items-center gap-2 text-sm text-slate-500">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
+            </span>
+            <span className="font-medium text-emerald-600">Sistem aktif</span>
+            <span className="text-slate-300">·</span>
+            Fallback otomatis tersedia
+          </div>
+          <div className="text-xs text-slate-400 flex items-center gap-1.5">
+            <i className="fa-regular fa-clock" />
+            Terakhir diperbarui: {lastUpdatedStr}
           </div>
         </div>
-      </CardFooter>
+      </CardContent>
     </Card>
   );
 }

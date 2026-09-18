@@ -1,5 +1,12 @@
 import { getKalender } from "@/lib/scraper";
+import type { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
+
+export const metadata: Metadata = {
+  title: "Kalender LePKom",
+  description: "Tanggal penting kursus, pengulangan, dan libur semester VM LePKom Universitas Gunadarma.",
+  alternates: { canonical: "/gunadarma/lepkom/kalender" },
+};
 
 export default async function KalenderPage() {
   const events = await getKalender();

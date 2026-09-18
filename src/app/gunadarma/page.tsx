@@ -1,7 +1,8 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getAnnouncements } from "@/lib/scraper";
+import { getAnnouncements, type Announcement } from "@/lib/scraper";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/AnimateIn";
 import { GunadarmaFeed } from "@/components/gunadarma/GunadarmaFeed";
 import {
@@ -13,6 +14,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+
+export const metadata: Metadata = {
+  title: "Universitas Gunadarma — SiPadu",
+  description: "Portal terpadu pengumuman, jadwal kursus, materi LePKom, dan kalender akademik Universitas Gunadarma.",
+  alternates: { canonical: "/gunadarma" },
+};
 
 const KALENDER_PTA_2026 = [
   { kegiatan: "Pengenalan Kehidupan Kampus bagi Mahasiswa Baru (PKKMB)", tanggal: "21 September – 26 September 2026" },
@@ -33,7 +40,7 @@ const KALENDER_PTA_2026 = [
 export default async function Home() {
   const currentUni = { name: "Universitas Gunadarma", color: "bg-blue-600", badge: "bg-green-500", iconColor: "text-blue-600" };
 
-  let announcements: any[] = [];
+  let announcements: Announcement[] = [];
   try {
     announcements = await getAnnouncements();
   } catch (e) {
@@ -106,13 +113,13 @@ export default async function Home() {
           
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
             <Link 
-              href="/baak/pengumuman" 
+              href="/gunadarma/baak/pengumuman" 
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-sm hover:shadow hover:-translate-y-0.5"
             >
               Pengumuman BAAK
             </Link>
             <Link 
-              href="/lepkom/jadwal" 
+              href="/gunadarma/lepkom/jadwal" 
               className="bg-white hover:bg-slate-50 text-blue-600 border border-blue-600 px-6 py-3 rounded-lg font-semibold transition-colors"
             >
               Jadwal VM LePKom
@@ -146,7 +153,7 @@ export default async function Home() {
 
           <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <StaggerItem>
-              <Link href="/baak/pengumuman" className="block outline-none group">
+              <Link href="/gunadarma/baak/pengumuman" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-bullhorn text-2xl text-blue-500 group-hover:scale-110 transition-transform"></i>}
                 iconBg="bg-blue-50"
@@ -156,7 +163,7 @@ export default async function Home() {
               </Link>
             </StaggerItem>
             <StaggerItem>
-              <Link href="/lepkom/pengumuman" className="block outline-none group">
+              <Link href="/gunadarma/lepkom/pengumuman" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-laptop-code text-2xl text-red-500 group-hover:scale-110 transition-transform"></i>}
                 iconBg="bg-red-50"
@@ -166,7 +173,7 @@ export default async function Home() {
               </Link>
             </StaggerItem>
             <StaggerItem>
-              <Link href="/lepkom/jadwal" className="block outline-none group">
+              <Link href="/gunadarma/lepkom/jadwal" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-calendar text-2xl text-purple-500 group-hover:scale-110 transition-transform"></i>}
                 iconBg="bg-purple-50"
@@ -176,7 +183,7 @@ export default async function Home() {
               </Link>
             </StaggerItem>
             <StaggerItem>
-              <Link href="/lepkom/materi" className="block outline-none group">
+              <Link href="/gunadarma/lepkom/materi" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-book-open text-2xl text-teal-500 group-hover:scale-110 transition-transform"></i>}
                 iconBg="bg-teal-50"
@@ -186,7 +193,7 @@ export default async function Home() {
               </Link>
             </StaggerItem>
             <StaggerItem>
-              <Link href="/lepkom/kalender" className="block outline-none group">
+              <Link href="/gunadarma/lepkom/kalender" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-calendar-days text-2xl text-orange-500 group-hover:scale-110 transition-transform"></i>}
                 iconBg="bg-orange-50"
@@ -196,7 +203,7 @@ export default async function Home() {
               </Link>
             </StaggerItem>
             <StaggerItem>
-              <Link href="/baak/kalender" className="block outline-none group">
+              <Link href="/gunadarma/baak/kalender" className="block outline-none group">
                 <FeatureCard 
                   icon={<i className="fa-solid fa-calendar-check text-2xl text-green-500 group-hover:scale-110 transition-transform"></i>}
                 iconBg="bg-green-50"
@@ -258,7 +265,7 @@ export default async function Home() {
           </AnimateIn>
           
           <AnimateIn delay={0.5} className="text-center">
-             <Link href="/baak/kalender" className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-2 hover:underline">
+             <Link href="/gunadarma/baak/kalender" className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-2 hover:underline">
                Lihat detail Kalender Akademik <i className="fa-solid fa-arrow-right text-xs"></i>
              </Link>
           </AnimateIn>

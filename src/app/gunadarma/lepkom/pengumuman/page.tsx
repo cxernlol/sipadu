@@ -1,8 +1,8 @@
 import { getAnnouncements } from "@/lib/scraper";
+import type { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/AnimateIn";
 
 import {
   Pagination,
@@ -13,9 +13,17 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/AnimateIn";
 
-export default async function PengumumanPage({ searchParams }: { searchParams: { page?: string } }) {
-  const currentPage = parseInt(searchParams.page || "1", 10);
+export const metadata: Metadata = {
+  title: "Pengumuman LePKom",
+  description: "Informasi kursus resmi dari Virtual Machine Lembaga Pengembangan Komputer Universitas Gunadarma.",
+  alternates: { canonical: "/gunadarma/lepkom/pengumuman" },
+};
+
+export default async function PengumumanPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const resolvedParams = await searchParams;
+  const currentPage = parseInt(resolvedParams.page || "1", 10);
   const itemsPerPage = 8;
   const rawAnnouncements = await getAnnouncements();
   
@@ -84,7 +92,7 @@ export default async function PengumumanPage({ searchParams }: { searchParams: {
                 <PaginationContent>
                   <PaginationItem>
                       <PaginationPrevious 
-                      href={currentPage > 1 ? `/lepkom/pengumuman?page=${currentPage - 1}` : "#"} 
+                      href={currentPage > 1 ? `/gunadarma/lepkom/pengumuman?page=${currentPage - 1}` : "#"} 
                       className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
                     />
                   </PaginationItem>
@@ -93,7 +101,7 @@ export default async function PengumumanPage({ searchParams }: { searchParams: {
                     const pageNumber = i + 1;
                     return (
                       <PaginationItem key={pageNumber}>
-                        <PaginationLink href={`/lepkom/pengumuman?page=${pageNumber}`} isActive={currentPage === pageNumber}>
+                        <PaginationLink href={`/gunadarma/lepkom/pengumuman?page=${pageNumber}`} isActive={currentPage === pageNumber}>
                           {pageNumber}
                         </PaginationLink>
                       </PaginationItem>
@@ -108,7 +116,7 @@ export default async function PengumumanPage({ searchParams }: { searchParams: {
                   
                   <PaginationItem>
                     <PaginationNext 
-                      href={currentPage < totalPages ? `/lepkom/pengumuman?page=${currentPage + 1}` : "#"}
+                      href={currentPage < totalPages ? `/gunadarma/lepkom/pengumuman?page=${currentPage + 1}` : "#"}
                       className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
                     />
                   </PaginationItem>
@@ -187,7 +195,7 @@ export default async function PengumumanPage({ searchParams }: { searchParams: {
                 <Link href="#" className="flex items-center gap-3 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 p-2 rounded-md transition-colors">
                   <i className="fa-solid fa-square-check text-green-500"></i> Cek Kelulusan
                 </Link>
-                <Link href="/jadwal" className="flex items-center gap-3 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 p-2 rounded-md transition-colors">
+                <Link href="/gunadarma/lepkom/jadwal" className="flex items-center gap-3 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 p-2 rounded-md transition-colors">
                   <i className="fa-solid fa-calendar text-purple-500"></i> Jadwal Kursus
                 </Link>
                 <Link href="#" className="flex items-center gap-3 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 p-2 rounded-md transition-colors">

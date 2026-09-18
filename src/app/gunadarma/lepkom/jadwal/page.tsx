@@ -1,6 +1,12 @@
 import { getJadwal } from "@/lib/scraper";
+import type { Metadata } from "next";
 import { JadwalClient } from "./jadwal-client";
 
+export const metadata: Metadata = {
+  title: "Jadwal Kursus LePKom",
+  description: "Cari jadwal kursus dan pengulangan praktikum VM LePKom Universitas Gunadarma berdasarkan NPM, nama, atau kelas.",
+  alternates: { canonical: "/gunadarma/lepkom/jadwal" },
+};
 export default async function JadwalPage() {
   const schedule = await getJadwal();
 

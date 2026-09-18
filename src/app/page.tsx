@@ -3,7 +3,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/AnimateIn";
-import { UpdatesChart } from "@/components/UpdatesChart";
+import { RealTimeStats } from "@/components/UpdatesChart";
+import { getStats } from "@/lib/scraper";
 
 const UNIVERSITIES = [
   { id: "gunadarma", name: "Universitas Gunadarma", shortName: "Gunadarma", domain: "/gunadarma", status: "Live", accent: "from-purple-500 to-indigo-600", iconBg: "bg-purple-50", iconText: "text-purple-500", ringColor: "ring-purple-200", description: "Jadwal kursus, pengumuman BAAK, materi LePKom, dan kalender akademik.", logo: "https://upload.wikimedia.org/wikipedia/commons/6/6d/Logo_Universitas_Gunadarma.svg" },
@@ -43,7 +44,9 @@ const { results, source } = await res.json();
   "source": "live" // atau "cache"
 }`;
 
-export default function LandingPage() {
+export default async function LandingPage() {
+  const stats = await getStats();
+  const totalData = stats.totalAnnouncements + stats.totalJadwal + stats.totalMateri + stats.totalKalender;
   return (
     <div className="min-h-screen bg-[#f8f8fa] text-slate-900 relative overflow-hidden">
       {/* ===== AMBIENT BACKGROUND ===== */}
@@ -70,7 +73,7 @@ export default function LandingPage() {
           <nav className="hidden md:flex items-center gap-8 text-sm text-slate-400">
             <a href="#universitas" className="hover:text-slate-900 transition-colors duration-200">Universitas</a>
             <a href="#fitur" className="hover:text-slate-900 transition-colors duration-200">Fitur</a>
-            <a href="#api" className="hover:text-slate-900 transition-colors duration-200">API</a>
+            <Link href="/api-docs" className="hover:text-slate-900 transition-colors duration-200">API</Link>
             <a href="#statistik" className="hover:text-slate-900 transition-colors duration-200">Statistik</a>
           </nav>
         </div>
@@ -123,8 +126,8 @@ export default function LandingPage() {
           <AnimateIn delay={0.15}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {[
-                { value: "5", label: "Universitas", suffix: "+" },
-                { value: "1.2K", label: "Pembaruan Data", suffix: "" },
+                { value: String(stats.sources), label: "Sumber Data", suffix: "+" },
+                { value: String(totalData), label: "Data Terintegrasi", suffix: "" },
                 { value: "99.9", label: "Waktu Aktif", suffix: "%" },
                 { value: "< 200", label: "Respons (ms)", suffix: "" },
               ].map((stat) => (
@@ -298,7 +301,7 @@ export default function LandingPage() {
 
           <AnimateIn delay={0.2}>
             <div className="rounded-2xl border border-slate-200/80 bg-white/70 backdrop-blur-sm p-2 shadow-sm">
-              <UpdatesChart />
+              <RealTimeStats />
             </div>
           </AnimateIn>
         </div>

@@ -6,8 +6,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { AnimateIn } from "@/components/AnimateIn";
+
+export const metadata: Metadata = {
+  title: "Kalender Akademik BAAK",
+  description: "Jadwal kegiatan akademik Ganjil (PTA) 2026/2027 Universitas Gunadarma dari BAAK.",
+  alternates: { canonical: "/gunadarma/baak/kalender" },
+};
 
 const KALENDER_PTA_2026 = [
   { kegiatan: "Pengenalan Kehidupan Kampus bagi Mahasiswa Baru (PKKMB)", tanggal: "21 September – 26 September 2026" },

@@ -1,8 +1,8 @@
 import { getAnnouncements } from "@/lib/scraper";
+import type { Metadata } from "next";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/AnimateIn";
 
 import {
   Pagination,
@@ -13,9 +13,17 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { AnimateIn, StaggerContainer, StaggerItem } from "@/components/AnimateIn";
 
-export default async function PengumumanPage({ searchParams }: { searchParams: { page?: string } }) {
-  const currentPage = parseInt(searchParams.page || "1", 10);
+export const metadata: Metadata = {
+  title: "Pengumuman BAAK",
+  description: "Informasi akademik resmi dari Biro Administrasi Akademik dan Kemahasiswaan Universitas Gunadarma.",
+  alternates: { canonical: "/gunadarma/baak/pengumuman" },
+};
+
+export default async function PengumumanPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const resolvedParams = await searchParams;
+  const currentPage = parseInt(resolvedParams.page || "1", 10);
   const itemsPerPage = 8;
   const rawAnnouncements = await getAnnouncements();
   
@@ -84,7 +92,7 @@ export default async function PengumumanPage({ searchParams }: { searchParams: {
                 <PaginationContent>
                   <PaginationItem>
                       <PaginationPrevious 
-                      href={currentPage > 1 ? `/baak/pengumuman?page=${currentPage - 1}` : "#"} 
+                      href={currentPage > 1 ? `/gunadarma/baak/pengumuman?page=${currentPage - 1}` : "#"} 
                       className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
                     />
                   </PaginationItem>
@@ -93,7 +101,7 @@ export default async function PengumumanPage({ searchParams }: { searchParams: {
                     const pageNumber = i + 1;
                     return (
                       <PaginationItem key={pageNumber}>
-                        <PaginationLink href={`/baak/pengumuman?page=${pageNumber}`} isActive={currentPage === pageNumber}>
+                        <PaginationLink href={`/gunadarma/baak/pengumuman?page=${pageNumber}`} isActive={currentPage === pageNumber}>
                           {pageNumber}
                         </PaginationLink>
                       </PaginationItem>
@@ -108,7 +116,7 @@ export default async function PengumumanPage({ searchParams }: { searchParams: {
                   
                   <PaginationItem>
                     <PaginationNext 
-                      href={currentPage < totalPages ? `/baak/pengumuman?page=${currentPage + 1}` : "#"}
+                      href={currentPage < totalPages ? `/gunadarma/baak/pengumuman?page=${currentPage + 1}` : "#"}
                       className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
                     />
                   </PaginationItem>

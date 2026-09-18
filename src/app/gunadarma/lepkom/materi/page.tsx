@@ -1,5 +1,12 @@
 import { getMateri } from "@/lib/scraper";
+import type { Metadata } from "next";
 import { MateriTabs } from "@/components/lepkom/MateriTabs";
+
+export const metadata: Metadata = {
+  title: "Materi Kursus LePKom",
+  description: "Daftar lengkap materi per tingkat dari program kursus VM LePKom Universitas Gunadarma.",
+  alternates: { canonical: "/gunadarma/lepkom/materi" },
+};
 
 export default async function MateriPage() {
   const materi = await getMateri();

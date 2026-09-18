@@ -49,26 +49,35 @@ const jsonLd = {
   }
 };
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
       <head>
         <link rel="stylesheet" href="/fontawesome/fontawesome.css" />
         <link rel="stylesheet" href="/fontawesome/solid.css" />
         <link rel="stylesheet" href="/fontawesome/regular.css" />
         <link rel="stylesheet" href="/fontawesome/brands.css" />
       </head>
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-slate-50 text-slate-900 min-h-screen flex flex-col`}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-50 min-h-screen flex flex-col`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
-        <CookieBanner />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <CookieBanner />
+        </ThemeProvider>
       </body>
     </html>
   );

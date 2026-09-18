@@ -23,7 +23,7 @@ export default async function UniLayout({
       <main className="flex-1">
         {children}
       </main>
-      <Footer />
+      <Footer uni="gunadarma" />
       <Toaster />
       <UpdateNotifier latestId={latestAnnouncement?.id} latestTitle={latestAnnouncement?.title} />
     </div>
